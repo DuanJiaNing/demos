@@ -1,0 +1,51 @@
+几种查询方式的开销
+对于 Select、Update 或者 Delete，如果不指定维度，SQL将作用于所有的库和表
+在数据库表中插入 100000 * 3 条数据进行测试
+
+1. 指定主维度或者辅维度，都可以快速查询到数据，性能高
+657ms: SELECT * from sign_in WHERE customer_id=10 and id=14938
+963 1038 1092ms: SELECT id from sign_in WHERE customer_id between 10 and 10000
+
+2. 不指定主维度或者辅维度，会查询所有主维度的表，性能差
+581 584 587 ms: SELECT id from sign_in WHERE id=10
+686 700 733ms: SELECT id from sign_in WHERE id between 10 and 10000
+
+
+792 710 636ms: SELECT id from sign_in cc WHERE CURRENT_SIGN_IN_STORE_ID=6400
+1326 1082 1077ms: SELECT id FROM sign_in WHERE id &lt;&gt; 1
+719 740 698ms: SELECT id FROM sign_in WHERE CREATE_DATE between '2018-05-11 16:51:11' and '2018-05-11 16:59:11'
+
+3. LIMIT, OFFSET, ORDER BY 都支持，性能差
+4. 支持子查询，但无法识别子查询中的分区字段，性能差
+5. 支持 GROUP BY, COUNT, MAX, MIN 都支持，AVG 不支持，性能差，另外必须加字段别名
+6. N语句支持，指定主维度在IN语句内，因为使用了并发查询，性能极佳。不建议IN语句里面有太多的数据。
+
+可以支撑的数据规模
+
+
+支撑到什么时候
+
+数据增长率：
+主表 crm_customer_signin
+
+按年统计
+select date_format(date, '%Y') as year, count(*) as sheets from crm_customer_signin group by date_format(date, '%Y');
+按月统计
+select date_format(date, '%Y-%m') as year, count(*) as sheets from crm_customer_signin group by date_format(date, '%Y-%m');
+按季度统计
+select date_format(date, '%Y-%m') as year, count(*) as sheets from crm_customer_signin group by concat(date_format(DATE, '%Y'),FLOOR((date_format(DATE, '%m')+2)/3));
+按天统计
+select date_format(date, '%Y-%m-%d ') as year, count(*) as sheets from crm_customer_signin group by date_format(DATE, '%Y-%m-%d');
+按时间段统计
+select date_format(date, '%Y-%m-%d %H ') as year, count(*) as sheets from crm_customer_signin group by date_format(DATE, '%Y-%m-%d %H ');
+
+现在使用最频繁的查询语句
+CustomerSignDao#
+findAllSigninHistory 4
+getCustomerSignInSimpleDetailByMonth 5
+findHasSign 5
+findAllSigninHistoryPLus 6
+countSignCustomers 5
+getMyisamID 4
+
+findAllSigninHistoryPLus

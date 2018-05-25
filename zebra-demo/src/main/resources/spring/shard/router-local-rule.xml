@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<router-rule>
+    <table-shard-rule table="sign_in" generatedPK="id">
+        <shard-dimension
+                dbRule="#customer_id# * 0"
+                dbIndexes="db"
+                tbRule="0 + ((4 - 1) &amp; (crc32(#customer_id#) ^ (crc32(#customer_id#) &gt;&gt;&gt; 16)))"
+                tbSuffix="everydb:[0,4]"
+                isMaster="true">
+        </shard-dimension>
+
+    </table-shard-rule>
+</router-rule>
+
+<!--len只能为2的整次幂，否则路由分布不均匀-->
+<!--len:表数量-->
+<!--offset: 表下标偏移-->

@@ -1,0 +1,30 @@
+https://www.zhihu.com/question/20733617
+
+参考jdk8 HashMap 原理
+维度：key
+表下标偏移：offset
+表数量：len
+散列值：hash = crc32(key)
+扰动函数：ha = (hash ^ (hash >>> 16))
+取模运算：in = (len - 1) & ha
+映射到的表下标：index = offset + in
+tbRule: offset + ((len - 1) & (crc32(key) ^ (crc32(key) >>> 16)))
+
+如：offset = 3,len = 2,key 为 #customer_id#
+tbRule = "3 + ((2 - 1) &amp; (crc32(#customer_id#) ^ ((crc32(#customer_id#) &gt;&gt;&gt; 16)))"
+
+
+tbRule 格式必须严格相同
+len只能为2的模（否则分别及其不均匀）
+offset 不能小于 1
+
+下标为0的表不能使用
+扰动函数：使碰撞更平均，即 hash 映射到的 index 在可选 index 中被选中的概率趋于相同
+取模运算：高位全部归零，只保留低位，用作下标访问
+表数量取2的整次幂：长度减1，正好相当于一个“低位掩码”，便于取模。
+
+9 1001 1111 0-15
+4 0100 0111 0-11
+3 0011 0011 0-3
+
+
