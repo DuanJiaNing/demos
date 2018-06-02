@@ -1,0 +1,21 @@
+
+
+server:
+  port: 8081
+  tomcat:
+    uri-encoding: utf-8
+  context-path: /test
+
+# mysql
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8
+    username: root
+    password: ABC246810
+  profiles:
+    active: dev
+
+pro:
+  age: 12+${server.port}
+  sex: male
