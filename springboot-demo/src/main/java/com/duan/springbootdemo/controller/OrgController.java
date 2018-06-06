@@ -25,9 +25,33 @@ public class OrgController {
     }
 
     @PostMapping
-    public String addOrg(@RequestBody Org org){
+    public String addOrg(@RequestBody Org org) {
         Org save = orgRepository.save(org);
         return save.toString();
+    }
+
+    @GetMapping("/{id}")
+    public Org getOrg(@PathVariable Integer id) {
+        return orgRepository.findOne(id);
+    }
+
+    @PutMapping("/{id}")
+    public Org updateOrg(@PathVariable Integer id,
+                         @RequestParam("name") String name,
+                         @RequestParam("number") Integer number,
+                         @RequestParam("intro") String intro) {
+        Org org = new Org();
+        org.setId(id);
+        org.setIntro(intro);
+        org.setName(name);
+        org.setNumber(number);
+
+        return orgRepository.save(org);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteOrg(@PathVariable Integer id) {
+        orgRepository.delete(id);
     }
 
 }
