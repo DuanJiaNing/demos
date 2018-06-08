@@ -10,8 +10,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=UTC
     username: root
-    password: 1234
-    type: com.alibaba.druid.pool.DruidDataSource
+    password: ABC246810
   jpa:
     hibernate:
       ddl-auto: create
