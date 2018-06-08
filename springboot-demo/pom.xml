@@ -51,6 +51,12 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>1.4.3.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>
