@@ -1,4 +1,4 @@
-package com.duan.springbootdemo.entity;
+package com.duan.springbootdemo.domain;
 
 import lombok.Data;
 

@@ -13,5 +13,5 @@ spring:
     password: ABC246810
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true

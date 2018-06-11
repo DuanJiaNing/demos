@@ -1,6 +1,6 @@
 package com.duan.springbootdemo.repository;
 
-import com.duan.springbootdemo.entity.Org;
+import com.duan.springbootdemo.domain.Org;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

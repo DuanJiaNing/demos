@@ -1,6 +1,6 @@
 package com.duan.springbootdemo.service;
 
-import com.duan.springbootdemo.entity.Org;
+import com.duan.springbootdemo.domain.Org;
 import com.duan.springbootdemo.repository.OrgRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

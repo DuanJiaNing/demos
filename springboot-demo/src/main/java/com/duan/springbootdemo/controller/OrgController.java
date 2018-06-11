@@ -1,6 +1,7 @@
 package com.duan.springbootdemo.controller;
 
-import com.duan.springbootdemo.entity.Org;
+import com.duan.springbootdemo.domain.Org;
+import com.duan.springbootdemo.domain.Result;
 import com.duan.springbootdemo.repository.OrgRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -22,8 +23,14 @@ public class OrgController {
     private OrgRepository orgRepository;
 
     @GetMapping("/list")
-    public List<Org> orgList() {
-        return orgRepository.findAll();
+    public Result<List<Org>> orgList() {
+        final List<Org> orgs = orgRepository.findAll();
+        Result<List<Org>> result = new Result<>();
+        result.setCode(1);
+        result.setMsg("成功");
+        result.setData(orgs);
+
+        return result;
     }
 
     @PostMapping
