@@ -28,4 +28,8 @@ public class OrgService {
         orgRepository.delete(1);
     }
 
+    public Org findOne(int id){
+        return orgRepository.findOne(id);
+    }
+
 }
