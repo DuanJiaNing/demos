@@ -2,6 +2,7 @@ package com.duan.springbootdemo.handle;
 
 import com.duan.springbootdemo.domain.Result;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -10,13 +11,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author DuanJiaNing
  */
 @ControllerAdvice
-public class ExceptionHandler {
+public class ExceptionHandlers {
 
-    @org.springframework.web.bind.annotation.ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Result handle(Exception e) {
-
-        return null;
+        final Result result = new Result();
+        result.setData(e.getMessage());
+        return result;
     }
 
 }
