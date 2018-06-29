@@ -13,3 +13,15 @@ rocketmq:
     test: rkmq-topic-test
   tag:
     test: rkmq-tag-test
+
+
+xxl:
+  job:
+    executor: # 执行器配置
+      appname: quartz-xxl-demo
+      ip: 
+      port: 9999
+      logpath: /data/applogs/xxl-job/jobhandler
+    accessToken:
+    admin:
+      addresses: http://127.0.0.1:5680 # xxl-job 調度器地址
