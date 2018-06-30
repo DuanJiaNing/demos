@@ -20,7 +20,7 @@ public class QuartService {
     /**
      * 添加一个任务到 quartz
      */
-    public void addJob(ScheduleJob scheduleJob, Job job) throws SchedulerException {
+    public void addJob(ScheduleJob scheduleJob, Class<? extends Job> clazz) throws SchedulerException {
         if (scheduleJob == null || scheduleJob.getJobStatus() != ScheduleJob.STATUS_RUNNING) {
             return;
         }
@@ -45,7 +45,7 @@ public class QuartService {
 
             // Quartz 在每次执行 Job 时，都重新创建一个 Job 实例，所以它不直接接受一个 Job 的实例，相反它接收一个 Job 实现类
             JobDetail jobDetail = JobBuilder
-                    .newJob(job.getClass())
+                    .newJob(clazz)
                     .withIdentity(scheduleJob.getJobName(), scheduleJob.getJobGroup())
                     .build();
             jobDetail.getJobDataMap().put("scheduleJob", scheduleJob); // 把任务参数绑定到 任务数据 map 中

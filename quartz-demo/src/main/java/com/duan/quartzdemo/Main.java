@@ -1,7 +1,11 @@
 package com.duan.quartzdemo;
 
 import com.duan.quartzdemo.entity.ScheduleJob;
+import com.duan.quartzdemo.quart.JobOne;
 import com.duan.quartzdemo.quart.QuartService;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +28,7 @@ public class Main implements InitializingBean {
                 "job-1",
                 "group-1",
                 ScheduleJob.STATUS_RUNNING,
-                "/3 * * * * ? "), System.out::println);
+                "/3 * * * * ? "), JobOne.class);
 
     }
 
