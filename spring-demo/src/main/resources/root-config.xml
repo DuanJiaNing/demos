@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemalocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <import resource="classpath:applicationContext.xml"/>
+    <bean class="com.duan.springdemo.CDPlayerConfig"/>
+
+    <beans profile="dev">
+
+    </beans>
+
+    <beans profile="test">
+
+    </beans>
+
+</beans>
