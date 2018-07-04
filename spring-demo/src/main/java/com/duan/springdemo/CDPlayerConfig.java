@@ -25,7 +25,7 @@ public class CDPlayerConfig {
 
     @Bean
     public CDPlayer cdPlayer(@Qualifier("setPeppers") CompactDisc disc) {
-        return new CDPlayer(disc);
+        return new CDPlayer();
     }
 
     @Bean
