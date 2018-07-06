@@ -1,4 +1,4 @@
-package com.duan.springdemo;
+package com.duan.springdemo.config;
 
 import org.springframework.context.annotation.*;
 
@@ -11,7 +11,8 @@ import java.util.Date;
  */
 @Configuration
 @Import(CDPlayerConfig.class)
-@ImportResource("classpath:applicationContext.xml")
+@ComponentScan("com.duan.springdemo")
+@ImportResource({"classpath:spring-config.xml", "classpath:root-config.xml"})
 public class AppConfig {
 
     @Bean
