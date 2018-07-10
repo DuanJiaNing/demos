@@ -1,6 +1,6 @@
 package com.duan.springdemo.config;
 
-import com.duan.springdemo.MyConditional;
+import com.duan.springdemo.conditional.MyConditional;
 import com.duan.springdemo.disc.CompactDisc;
 import com.duan.springdemo.disc.MyDisc;
 import com.duan.springdemo.disc.SgtPeppers;

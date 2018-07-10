@@ -10,7 +10,9 @@ import java.util.Date;
  * @author DuanJiaNing
  */
 @Configuration
-@Import(CDPlayerConfig.class)
+@Import({
+        CDPlayerConfig.class,
+        MVCConfig.class})
 @ComponentScan("com.duan.springdemo")
 @ImportResource({"classpath:spring-config.xml", "classpath:root-config.xml"})
 public class AppConfig {

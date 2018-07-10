@@ -1,4 +1,4 @@
-package com.duan.springdemo;
+package com.duan.springdemo.conditional;
 
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
