@@ -1,5 +1,7 @@
 package com.duan.springdemo.config;
 
+import com.duan.springdemo.dessert.Dessert;
+import com.duan.springdemo.dessert.IceCream;
 import org.springframework.context.annotation.*;
 
 import java.util.Date;
@@ -15,6 +17,7 @@ import java.util.Date;
         MVCConfig.class})
 @ComponentScan("com.duan.springdemo")
 @ImportResource({"classpath:spring-config.xml", "classpath:root-config.xml"})
+@PropertySource("classpath:application.properties")
 public class AppConfig {
 
     @Bean
@@ -23,5 +26,10 @@ public class AppConfig {
         return new Date();
     }
 
+    @Bean
+    @Primary
+    public Dessert myDessert() {
+        return new IceCream();
+    }
 
 }
