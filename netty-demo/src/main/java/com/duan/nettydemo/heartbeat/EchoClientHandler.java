@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class EchoClientHander extends SimpleChannelInboundHandler<ByteBuf> {
+public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
 //    @Autowired
 //    private CustomProtocol heartBeat;

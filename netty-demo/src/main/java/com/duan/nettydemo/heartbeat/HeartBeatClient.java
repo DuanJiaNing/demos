@@ -56,7 +56,7 @@ public class HeartBeatClient {
                     // 10 秒没发送消息 将IdleStateHandler 添加到 ChannelPipeline 中
                     .addLast(new IdleStateHandler(0, 10, 0))
                     /*.addLast(new HeartBeatEncode())*/
-                    .addLast(new EchoClientHander());
+                    .addLast(new EchoClientHandler());
         }
     }
 
