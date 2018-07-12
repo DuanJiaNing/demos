@@ -1,9 +1,9 @@
 package com.duan.springdemo;
 
 
-import com.duan.springdemo.config.CDPlayerConfig;
 import com.duan.springdemo.disc.CompactDisc;
 import com.duan.springdemo.player.CDPlayer;
+import com.duan.springdemo.player.CDPlayerConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

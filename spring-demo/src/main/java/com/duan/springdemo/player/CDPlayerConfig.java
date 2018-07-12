@@ -1,10 +1,10 @@
-package com.duan.springdemo.config;
+package com.duan.springdemo.player;
 
 import com.duan.springdemo.conditional.MyConditional;
 import com.duan.springdemo.disc.CompactDisc;
 import com.duan.springdemo.disc.MyDisc;
 import com.duan.springdemo.disc.SgtPeppers;
-import com.duan.springdemo.player.CDPlayer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -36,6 +36,11 @@ public class CDPlayerConfig {
     public MyDisc myDisc() {
         return new MyDisc();
     }
+
+    @Autowired
+    @Qualifier("dvd")
+//    @Qualifier("DVDPlayer")
+    private MediaPlayer dvdPlayer;
 
 }
 

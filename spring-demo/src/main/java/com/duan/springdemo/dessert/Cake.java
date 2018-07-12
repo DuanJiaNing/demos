@@ -1,5 +1,6 @@
 package com.duan.springdemo.dessert;
 
+import com.duan.springdemo.dessert.annotation.Soft;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,5 +9,6 @@ import org.springframework.stereotype.Component;
  * @author DuanJiaNing
  */
 @Component
+@Soft
 public class Cake implements Dessert {
 }

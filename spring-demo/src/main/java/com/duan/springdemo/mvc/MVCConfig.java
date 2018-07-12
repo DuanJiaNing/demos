@@ -1,4 +1,4 @@
-package com.duan.springdemo.config;
+package com.duan.springdemo.mvc;
 
 import lombok.Data;
 import org.springframework.context.annotation.Bean;

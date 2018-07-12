@@ -2,6 +2,8 @@ package com.duan.springdemo.config;
 
 import com.duan.springdemo.dessert.Dessert;
 import com.duan.springdemo.dessert.IceCream;
+import com.duan.springdemo.mvc.MVCConfig;
+import com.duan.springdemo.player.CDPlayerConfig;
 import org.springframework.context.annotation.*;
 
 import java.util.Date;
@@ -27,7 +29,7 @@ public class AppConfig {
     }
 
     @Bean
-    @Primary
+    /*@Primary*/
     public Dessert myDessert() {
         return new IceCream();
     }

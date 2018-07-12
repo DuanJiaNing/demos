@@ -1,5 +1,7 @@
 package com.duan.springdemo.dessert;
 
+import com.duan.springdemo.dessert.annotation.Multiple;
+import com.duan.springdemo.dessert.annotation.Soft;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,5 +10,7 @@ import org.springframework.stereotype.Component;
  * @author DuanJiaNing
  */
 @Component
+@Soft
+@Multiple
 public class Cookies implements Dessert {
 }

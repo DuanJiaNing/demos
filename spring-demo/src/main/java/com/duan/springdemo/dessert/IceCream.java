@@ -1,5 +1,7 @@
 package com.duan.springdemo.dessert;
 
+import com.duan.springdemo.dessert.annotation.Cold;
+import com.duan.springdemo.dessert.annotation.Creamy;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,5 +10,7 @@ import org.springframework.stereotype.Component;
  * @author DuanJiaNing
  */
 @Component
+@Creamy
+@Cold
 public class IceCream implements Dessert {
 }

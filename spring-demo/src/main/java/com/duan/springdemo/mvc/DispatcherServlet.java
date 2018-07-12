@@ -1,7 +1,7 @@
-package com.duan.springdemo;
+package com.duan.springdemo.mvc;
 
 import com.duan.springdemo.config.AppConfig;
-import com.duan.springdemo.config.CDPlayerConfig;
+import com.duan.springdemo.player.CDPlayerConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
