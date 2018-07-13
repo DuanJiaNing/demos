@@ -3,6 +3,7 @@ package com.duan.springdemo.config;
 import com.duan.springdemo.dessert.Dessert;
 import com.duan.springdemo.dessert.IceCream;
 import com.duan.springdemo.mvc.MVCConfig;
+import com.duan.springdemo.mvc.shop.ShoppingConfig;
 import com.duan.springdemo.player.CDPlayerConfig;
 import org.springframework.context.annotation.*;
 
@@ -16,7 +17,8 @@ import java.util.Date;
 @Configuration
 @Import({
         CDPlayerConfig.class,
-        MVCConfig.class})
+        MVCConfig.class,
+        ShoppingConfig.class})
 @ComponentScan("com.duan.springdemo")
 @ImportResource({"classpath:spring-config.xml", "classpath:root-config.xml"})
 @PropertySource("classpath:application.properties")
