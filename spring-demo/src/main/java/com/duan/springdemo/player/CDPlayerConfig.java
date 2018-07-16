@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 /**
  * Created on 2018/6/25.
@@ -17,7 +16,7 @@ import org.springframework.context.annotation.Profile;
  * @author DuanJiaNing
  */
 @Configuration
-@Profile("dev") // 这个 config 只有在 dev profile 激化时其中的 bean 才会创建
+//@Profile("dev") // 这个 config 只有在 dev profile 激化时其中的 bean 才会创建
 public class CDPlayerConfig {
 
     //    @Bean(name = "peppers")
