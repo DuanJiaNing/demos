@@ -1,4 +1,4 @@
-package com.duan.nettydemo.echo.handler;
+package com.duan.nettydemo.echo.server.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * Created on 2018/7/12.
  * InBound 处理入站事件
+ * 服务器 handler：这个组件实现了服务器的业务逻辑，决定了连接创建后和接收到信息后该如何处理
  *
  * @author DuanJiaNing
  */
@@ -31,7 +32,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
 
         ByteBuf in = (ByteBuf) msg;
         log.info("in.toString(CharsetUtil.UTF_8) = " + in.toString(CharsetUtil.UTF_8));
-        ctx.write(msg); // 将数据返给发送者
+        ctx.write(msg); // 将数据返给发送者，临时保存，并不发送，在 channelReadComplete#writeAndFlush 中才发送
 
     }
 
