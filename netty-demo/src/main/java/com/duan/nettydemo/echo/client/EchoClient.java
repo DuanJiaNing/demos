@@ -26,6 +26,7 @@ public class EchoClient {
     private void start() throws Exception {
 
         // 分配给处理该事件的 Handler，这包括创建新的连接和处理入站和出站数据
+        // 一个单一的 EventLoop 通常会处理多个 Channel 事件。
         EventLoopGroup group = new NioEventLoopGroup();
 
         try {
