@@ -22,7 +22,16 @@ public class EnvOne implements BeanNameAware {
     private Environment env;
 
     @Value("${app.version}")
-    private Double version;
+    public Double version;
+
+    public Song[] songs = {
+            new Song("song 1", "artist a"),
+            new Song("song 2", "artist b"),
+            new Song("song 3", "artist b"),
+            new Song("song 4", "artist c"),
+            new Song("song 5", "artist c"),
+            new Song("song 6", "artist b"),
+    };
 
     @Override
     public void setBeanName(String name) {
@@ -40,5 +49,9 @@ public class EnvOne implements BeanNameAware {
 
         log.info(Arrays.toString(env.getActiveProfiles())); // 获取激活的 profiles
 
+    }
+
+    public String getStr(boolean nullable) {
+        return nullable ? null : "str";
     }
 }
