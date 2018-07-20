@@ -1,4 +1,4 @@
-package com.duan.springdemo.pad;
+package com.duan.springdemo.mvc.pad;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

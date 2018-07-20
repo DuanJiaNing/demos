@@ -1,4 +1,4 @@
-package com.duan.springdemo.pad;
+package com.duan.springdemo.mvc.pad;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
