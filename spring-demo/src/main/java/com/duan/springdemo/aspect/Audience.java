@@ -28,12 +28,12 @@ public class Audience {
         System.out.println("Audience.takeSeats");
     }
 
-    @AfterReturning("performance()")
+    @AfterReturning("performance() && within(com.duan.springdemo.aspect.*)")
     public void applause() { // 鼓掌
         System.out.println("Audience.applause");
     }
 
-    @AfterThrowing("performance()")
+    @AfterThrowing("performance() && bean(performanceImpl)")
     public void demandRefund() { // 退款
         System.out.println("Audience.demandRefund");
     }
