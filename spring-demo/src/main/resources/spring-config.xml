@@ -6,7 +6,8 @@
 
     <!--<context:component-scan base-package="com.duan.springdemo"/>-->
 
-    <bean class="com.duan.springdemo.disc.MyDisc" primary="true">
+    <!--关闭懒加载，否则 bean 的 @PostConstruct 注解无效-->
+    <bean class="com.duan.springdemo.disc.MyDisc" primary="true" id="disc" lazy-init="false">
         <constructor-arg ref="environment"/>
         <property name="name" value="duan"/>
     </bean>

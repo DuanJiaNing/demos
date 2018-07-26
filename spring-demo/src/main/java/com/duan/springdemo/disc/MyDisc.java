@@ -28,8 +28,8 @@ public class MyDisc implements CompactDisc {
     }
 
     @Override
-    public void play() {
-
+    public void play(int trackNumber) {
+        System.out.println("MyDisc#play#trackNumber = " + trackNumber);
     }
 
 }

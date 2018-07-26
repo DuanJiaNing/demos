@@ -7,6 +7,6 @@ package com.duan.springdemo.disc;
  */
 public interface CompactDisc {
 
-    void play();
+    void play(int trackNumber);
 
 }

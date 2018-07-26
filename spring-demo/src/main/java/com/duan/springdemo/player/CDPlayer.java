@@ -57,7 +57,7 @@ public class CDPlayer implements
 
     @Override
     public void play() {
-        disc.play();
+        disc.play(1);
     }
 
     @Override

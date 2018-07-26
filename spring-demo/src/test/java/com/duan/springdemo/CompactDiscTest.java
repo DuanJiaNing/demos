@@ -33,7 +33,7 @@ public class CompactDiscTest {
 
     @Test
     public void play() {
-        compactDisc.play();
+        compactDisc.play(1);
         System.out.println(compactDisc);
         System.out.println(compactDisc2);
         cdPlayer.play();

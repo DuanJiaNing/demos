@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SgtPeppers implements CompactDisc {
 
-    public void play() {
+    public void play(int trackNumber) {
         System.out.println(this.getClass().getCanonicalName());
     }
 
