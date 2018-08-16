@@ -47,6 +47,7 @@
         <protostuff-core.version>1.0.8</protostuff-core.version>
         <protostuff-runtime.version>1.0.8</protostuff-runtime.version>
         <commons-collections.version>3.2</commons-collections.version>
+        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
     </properties>
 
     <dependencies>
@@ -190,6 +191,19 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>LATEST</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>${thymeleaf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
