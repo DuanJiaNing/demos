@@ -10,7 +10,14 @@
 </head>
 <body>
 
-<a th:href="@{/spittles}">Spittles</a>
-<a th:href="@{/spitter/register}">Register</a>
+<form method="post" th:object="${spitter}" enctype="multipart/form-data">
+    <label>
+        Profile Picture
+    </label>
+    <input type="file" name="profilePicture" accept="image/jpeg,image/png,image/gif"><br>
+
+    <input type="submit" value="提交">
+</form>
+
 </body>
 </html>

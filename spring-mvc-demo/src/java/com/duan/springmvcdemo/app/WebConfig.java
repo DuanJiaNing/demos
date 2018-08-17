@@ -28,10 +28,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         resolver.setPrefix("/WEB-INF/views");
         resolver.setSuffix(".jsp");
         resolver.setExposeContextBeansAsAttributes(true);
-        registry.viewResolver(resolver);
-    }
+        registry.viewResolver(viewResolver);
+    }*/
 
-    @Override
+    /*@Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable(); // 静态资源处理
     }*/
@@ -40,7 +40,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public ViewResolver viewResolver(ITemplateEngine templateEngine) {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine);
-        viewResolver.setViewNames(new String[]{"*.html", "*.xhtml"});
+        viewResolver.setOrder(1);
+        viewResolver.setCharacterEncoding("UTF-8");
 
         return viewResolver;
     }
@@ -56,7 +57,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean // 模板解析器
     public ITemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setPrefix("/WEB-INF/templates");
+        templateResolver.setPrefix("/WEB-INF/templates/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML5");
         return templateResolver;

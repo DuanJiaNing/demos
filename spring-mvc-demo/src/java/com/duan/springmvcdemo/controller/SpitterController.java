@@ -5,18 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 /**
- * Created on 2018/8/15.
+ * Created on 2018/8/17.
  *
  * @author DuanJiaNing
  */
 @Controller
-@RequestMapping({"/", "/home"})
-public class HomeController {
+@RequestMapping("/spitter")
+public class SpitterController {
 
-    @RequestMapping
-    public String home() {
-        return "home";
-    }
 
     @RequestMapping("/register")
     public String register() {

@@ -2,6 +2,9 @@ package com.duan.springmvcdemo.app;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
+
 /**
  * Created on 2018/8/14.
  * web.xml 中配置 DispatcherServlet 的替代方案
@@ -28,4 +31,16 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
+    @Override // 注册 DispathcerServlet 之后回调
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+
+        // 文件上传 依赖 multipartResolver bean
+        registration.setMultipartConfig(new MultipartConfigElement("/tmp/spittr/upload"));
+        registration.setLoadOnStartup(1);
+        registration.setInitParameter("a", "A");
+    }
+
+
+
 }

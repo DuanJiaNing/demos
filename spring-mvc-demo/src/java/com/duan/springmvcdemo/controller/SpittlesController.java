@@ -1,7 +1,5 @@
 package com.duan.springmvcdemo.controller;
 
-import com.duan.springmvcdemo.dao.SpittlesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +13,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  */
 @Controller
 @RequestMapping("/spittles")
-public class SpittleController {
+public class SpittlesController {
 
-    @Autowired
-    private SpittlesRepository spittlesRepository;
+//    @Autowired
+//    private SpittlesRepository spittlesRepository;
 
     @RequestMapping(method = GET)
     public String spittles(Model model) {
-        model.addAttribute(spittlesRepository.findSpittles(Long.MAX_VALUE, 20));
+//        model.addAttribute(spittlesRepository.findSpittles(Long.MAX_VALUE, 20));
 
         return "spittles";
     }
