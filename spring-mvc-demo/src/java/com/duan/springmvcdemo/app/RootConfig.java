@@ -18,7 +18,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
         excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)})
 public class RootConfig {
 
-    @Bean
+    @Bean // 使用 MultipartFile 接收时才需要该 bean，使用 javax.servlet.http.Part 时无需该 bean
     public MultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
     }
