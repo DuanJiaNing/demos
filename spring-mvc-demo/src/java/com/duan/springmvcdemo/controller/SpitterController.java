@@ -4,9 +4,10 @@ import com.duan.springmvcdemo.entity.Spittle;
 import com.duan.springmvcdemo.exceptions.DuplicateSpittleException;
 import com.duan.springmvcdemo.exceptions.SpittleException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.util.Date;
  * @author DuanJiaNing
  */
 @Controller
-@RequestMapping("/spitter")
+@RequestMapping("/spittle")
 public class SpitterController {
 
     private static final String dir = "C:/Users/ai/Desktop/";
@@ -30,18 +31,29 @@ public class SpitterController {
     }
 
     @PostMapping("/doRegister")
-    public ModelAndView doRegister(@RequestPart("profilePicture") MultipartFile profilePicture) {
+    public String doRegister(@RequestPart("profilePicture") MultipartFile profilePicture, Spittle spittle,
+                             RedirectAttributes model) throws IOException {
 
-        ModelAndView mv = new ModelAndView("register");
-        try {
-            String path = dir + profilePicture.getOriginalFilename();
-            profilePicture.transferTo(new File(path));
-            mv.addObject("spitterAvatar", path);
-        } catch (IOException e) {
-            e.printStackTrace();
+        String path = dir + profilePicture.getOriginalFilename();
+        profilePicture.transferTo(new File(path));
+
+        model.addAttribute("username", "Tom"); // 加载路径参数中
+        model.addAttribute("avatar", path); // 普通字符串作为查询参数
+        // 复杂对象通过临时保存在会话的 flash 属性中，在 redircet 后从会话中获取并自动注入到查询参数中
+        model.addFlashAttribute("spittle", spittle);
+
+        return "redirect:/spittle/{username}";
+    }
+
+    @GetMapping("/{username}")
+    public String spittle(@PathVariable String username, Model model) {
+
+        Spittle spittle = (Spittle) model.asMap().get("spittle");
+        if (!model.containsAttribute("spittle")) {
+            model.addAttribute("spittle", new Object()); // 不存在再查询
         }
 
-        return mv;
+        return "register";
     }
 
     @GetMapping("/{id}")

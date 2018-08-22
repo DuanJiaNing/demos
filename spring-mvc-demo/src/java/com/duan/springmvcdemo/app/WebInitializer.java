@@ -13,6 +13,16 @@ import javax.servlet.ServletRegistration;
  */
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
+    @Override // 注册 DispathcerServlet 之后回调
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+
+        // 文件上传 依赖 multipartResolver bean
+        registration.setMultipartConfig(new MultipartConfigElement("C:/Users/ai/Desktop/"));
+        registration.setLoadOnStartup(1);
+        registration.setInitParameter("a", "A");
+    }
+
+
     // 第一个 spring 应用上下文
     // ContextLoaderListener，加载驱动后端的中间层和数据层组件 bean
     @Override
@@ -31,16 +41,6 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-
-    @Override // 注册 DispathcerServlet 之后回调
-    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-
-        // 文件上传 依赖 multipartResolver bean
-        registration.setMultipartConfig(new MultipartConfigElement("C:/Users/ai/Desktop/"));
-        registration.setLoadOnStartup(1);
-        registration.setInitParameter("a", "A");
-    }
-
 
 
 }

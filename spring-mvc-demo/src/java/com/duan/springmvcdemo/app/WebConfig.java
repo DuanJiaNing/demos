@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.ITemplateEngine;
@@ -22,19 +23,10 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 @ComponentScan("com.duan.springmvcdemo") // 启用组件扫描
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    /*@Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views");
-        resolver.setSuffix(".jsp");
-        resolver.setExposeContextBeansAsAttributes(true);
-        registry.viewResolver(viewResolver);
-    }*/
-
-    /*@Override
+    @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable(); // 静态资源处理
-    }*/
+    }
 
     @Bean
     public ViewResolver viewResolver(ITemplateEngine templateEngine) {
@@ -62,5 +54,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         templateResolver.setTemplateMode("HTML5");
         return templateResolver;
     }
+
+    /*@Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/views");
+        resolver.setSuffix(".jsp");
+        resolver.setExposeContextBeansAsAttributes(true);
+        registry.viewResolver(viewResolver);
+    }*/
 
 }
