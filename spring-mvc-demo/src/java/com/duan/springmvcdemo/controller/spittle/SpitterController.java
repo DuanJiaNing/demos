@@ -1,4 +1,4 @@
-package com.duan.springmvcdemo.controller;
+package com.duan.springmvcdemo.controller.spittle;
 
 import com.duan.springmvcdemo.entity.Spittle;
 import com.duan.springmvcdemo.exceptions.DuplicateSpittleException;

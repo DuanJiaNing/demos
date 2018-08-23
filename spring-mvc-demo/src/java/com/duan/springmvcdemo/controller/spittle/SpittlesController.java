@@ -1,4 +1,4 @@
-package com.duan.springmvcdemo.controller;
+package com.duan.springmvcdemo.controller.spittle;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

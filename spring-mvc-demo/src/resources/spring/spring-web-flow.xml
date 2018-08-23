@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:flow="http://www.springframework.org/schema/webflow-config"
+        xmlns="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/webflow-config
+    http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd">
+
+
+    <!--负责创建和执行流程-->
+    <flow:flow-executor id="flowExecutor"/>
+
+    <!--加载流程定义-->
+    <flow:flow-registry id="flowRegistry" base-path="/WEB-INF/flows">
+        <flow:flow-location-pattern value="*-flow.xml"/>
+    </flow:flow-registry>
+
+    <!--web-flow DispatcherServlet 的请求映射器-->
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+        <property name="flowRegistry" ref="flowRegistry"/>
+    </bean>
+
+    <!--响应/处理发送的流程-->
+    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+        <property name="flowExecutor" ref="flowExecutor"/>
+    </bean>
+
+</beans>
