@@ -1,4 +1,4 @@
-package com.duan.springmvcdemo.exceptions;
+package com.duan.springmvcdemo.spittle.exceptions;
 
 /**
  * Created on 2018/8/20.

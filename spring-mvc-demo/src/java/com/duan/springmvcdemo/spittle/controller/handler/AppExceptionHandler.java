@@ -1,6 +1,6 @@
-package com.duan.springmvcdemo.controller.handler;
+package com.duan.springmvcdemo.spittle.controller.handler;
 
-import com.duan.springmvcdemo.exceptions.DuplicateSpittleException;
+import com.duan.springmvcdemo.spittle.exceptions.DuplicateSpittleException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 

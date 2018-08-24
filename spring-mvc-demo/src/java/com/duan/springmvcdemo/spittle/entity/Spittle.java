@@ -1,4 +1,4 @@
-package com.duan.springmvcdemo.entity;
+package com.duan.springmvcdemo.spittle.entity;
 
 import java.util.Date;
 import java.util.Objects;

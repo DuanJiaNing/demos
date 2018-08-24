@@ -1,6 +1,6 @@
 package com.duan.springmvcdemo.app;
 
-import com.duan.springmvcdemo.listener.MyListener;
+import com.duan.springmvcdemo.spittle.listener.MyListener;
 import org.springframework.web.WebApplicationInitializer;
 
 import javax.servlet.*;

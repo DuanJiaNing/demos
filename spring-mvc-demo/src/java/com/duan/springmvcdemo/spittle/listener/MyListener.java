@@ -1,4 +1,4 @@
-package com.duan.springmvcdemo.listener;
+package com.duan.springmvcdemo.spittle.listener;
 
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;

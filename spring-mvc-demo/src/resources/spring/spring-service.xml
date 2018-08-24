@@ -8,7 +8,7 @@
     http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.duan.springmvcdemo.service"/>
+    <context:component-scan base-package="com.duan.springmvcdemo.*.service"/>
     <import resource="classpath:spring/spring-dao.xml"/>
 
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">

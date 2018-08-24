@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.springframework.org/schema/webflow"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+      http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      start-state="identifyCustomer"> <!--指定开始状态，不指定默认第一个-->
+
+    <!--流程内变量-->
+    <var name="order" class="com.duan.springmvcdemo.pizza.domain.Order"/>
+
+    <!--识别顾客-->
+    <subflow-state id="identifyCustomer" subflow="pizza/customer">
+        <output name="customer" value="order.customer"/> <!--输出-->
+        <transition on="customerReady" to="buildOrder"/>
+    </subflow-state>
+
+    <!--构建订单-->
+    <subflow-state id="buildOrder" subflow="pizza/order">
+        <input name="order" value="order"/>
+        <transition on="orderCreated" to="takePayment"/>
+    </subflow-state>
+
+    <!--确认支付信息-->
+    <subflow-state id="takePayment" subflow="pizza/payment">
+        <input name="order" value="order"/>
+        <transition on="paymentToken" to="saveOrder"/>
+    </subflow-state>
+
+    <!--提交订单-->
+    <action-state id="saveOrder">
+        <evaluate expression="pizzaFlowActions.saveOrder(order)"/> <!--执行的动作-->
+        <transition to="thankCustomer"/>
+    </action-state>
+
+    <!--感谢下单-->
+    <view-state id="thankCustomer" view="thankCustomer">
+        <transition to="endState"/>
+    </view-state>
+
+    <!--结束流程-->
+    <end-state id="endState"/>
+
+    <global-transitions> <!--全局转移定义-->
+        <transition on="cancel" to="endState"/>
+    </global-transitions>
+
+</flow>

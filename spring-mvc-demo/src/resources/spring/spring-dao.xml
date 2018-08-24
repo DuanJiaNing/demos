@@ -7,7 +7,7 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.duan.springmvcdemo.dao"/>
+    <context:component-scan base-package="com.duan.springmvcdemo.*.dao"/>
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">

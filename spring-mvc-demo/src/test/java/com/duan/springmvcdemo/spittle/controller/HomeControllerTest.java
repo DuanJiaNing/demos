@@ -1,4 +1,4 @@
-package com.duan.springmvcdemo.controller;
+package com.duan.springmvcdemo.spittle.controller;
 
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;

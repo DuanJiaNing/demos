@@ -1,6 +1,6 @@
-package com.duan.springmvcdemo.dao;
+package com.duan.springmvcdemo.spittle.dao;
 
-import com.duan.springmvcdemo.entity.Spittle;
+import com.duan.springmvcdemo.spittle.entity.Spittle;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

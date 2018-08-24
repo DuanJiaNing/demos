@@ -1,4 +1,4 @@
-package com.duan.springmvcdemo.controller;
+package com.duan.springmvcdemo.spittle.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
