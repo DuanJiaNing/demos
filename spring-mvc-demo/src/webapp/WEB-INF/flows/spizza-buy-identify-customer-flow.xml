@@ -6,7 +6,7 @@
 
     <var name="customer" class="com.duan.springmvcdemo.pizza.domain.Customer"/>
 
-    <view-state id="welcome">
+    <view-state id="welcome" view="pizza/welcome">
         <transition on="phoneEntered" to="lookupCustomer"/>
     </view-state>
 
@@ -17,7 +17,7 @@
         <transition to="customerReady"/>
     </action-state>
 
-    <view-state id="registrationForm" model="customer">
+    <view-state id="registrationForm" model="customer" view="pizza/registration">
         <on-entry>
             <evaluate expression="customer.phoneNumber = requestParameters.phoneNumber"/>
         </on-entry>

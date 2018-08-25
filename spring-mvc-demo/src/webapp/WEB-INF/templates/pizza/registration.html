@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank Customer</title>
+</head>
+<body>
+<h1>Registration</h1>
+<form>
+    <input type="hidden" name="_flowExecutionKey" th:value="${flowExecutionKey}"/><br>
+    Phone Number: <input type="text" name="phoneNumber"/><br>
+    Name: <input type="text" name="name"/><br>
+    Address: <input type="text" name="address"/><br>
+    City: <input type="text" name="city"/><br>
+    State: <input type="text" name="state"/><br>
+    Zip Code: <input type="text" name="zipCode"/><br>
+    <input type="submit" name="_eventId_submit" value="Submit">
+    <input type="submit" name="_eventId_cancel" value="Cancel">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank Customer</title>
+</head>
+<body>
+<h1>Thanks order</h1>
+<form>
+    <input type="hidden" name="_flowExecutionKey" th:value="${flowExecutionKey}"/><br>
+    <input type="text" name="phoneNumber"><br>
+    <input type="submit" name="_eventId_phoneEntered" value="Lookup Customer">
+</form>
+
+</body>
+</html>

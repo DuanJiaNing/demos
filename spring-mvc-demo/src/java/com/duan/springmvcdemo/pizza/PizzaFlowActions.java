@@ -2,6 +2,8 @@ package com.duan.springmvcdemo.pizza;
 
 import com.duan.springmvcdemo.pizza.domain.Customer;
 import com.duan.springmvcdemo.pizza.domain.Order;
+import com.duan.springmvcdemo.pizza.domain.Payment;
+import com.duan.springmvcdemo.pizza.domain.PaymentDetails;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,5 +30,9 @@ public class PizzaFlowActions {
         // TODO
     }
 
+    public Payment verifyPayment(PaymentDetails details) {
+        // TODO
+        return null;
+    }
 
 }

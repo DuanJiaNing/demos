@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank Customer</title>
+</head>
+<body>
+<h1>Create Pizza</h1>
+<form>
+    <input type="hidden" name="_flowExecutionKey" th:value="${flowExecutionKey}"/><br>
+    Size: <input type="radio" value="SMALL" th:label="small '(12-inch)'" name="size">
+    <input type="checkbox" th:value="${toppingsList}">
+    <input type="submit" name="_eventId_addPizza" value="Submit">
+    <input type="submit" name="_eventId_cancel" value="Cancel">
+</form>
+
+</body>
+</html>

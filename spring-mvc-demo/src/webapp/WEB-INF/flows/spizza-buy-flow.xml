@@ -33,7 +33,7 @@
     </action-state>
 
     <!--感谢下单-->
-    <view-state id="thankCustomer" view="thankCustomer">
+    <view-state id="thankCustomer" view="pizza/thankCustomer">
         <transition to="endState"/>
     </view-state>
 

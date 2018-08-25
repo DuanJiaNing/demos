@@ -22,6 +22,10 @@ public class Order implements Serializable {
         customer = new Customer();
     }
 
+    public void addPizza(Pizza pizza) {
+        this.pizzas.add(pizza);
+    }
+
     public List<Pizza> getPizzas() {
         return pizzas;
     }
