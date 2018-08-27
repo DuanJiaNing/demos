@@ -20,6 +20,7 @@
     <!--web-flow DispatcherServlet 的请求映射器-->
     <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
         <property name="flowRegistry" ref="flowRegistry"/>
+        <property name="pathMatcher" value="/pizza/*"/>
     </bean>
 
     <!--响应/处理发送的流程-->
