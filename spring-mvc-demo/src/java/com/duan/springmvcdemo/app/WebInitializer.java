@@ -34,7 +34,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
     // DispatcherServlet，加载包含 web 组件的 bane，如控制器、视图解析器以及处理器映射
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{WebConfig.class};
+        return new Class[]{WebConfig.class, SecurityConfig.class};
     }
 
     @Override
