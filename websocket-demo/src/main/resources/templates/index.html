@@ -4,39 +4,6 @@
     <meta charset="UTF-8">
     <title>Index</title>
 
-    <script type="application/javascript">
-
-        var ws = new WebSocket("ws://localhost:8080/ws");
-        var wsStatus = document.getElementById("wsStatus");
-        var wsMsg = document.getElementById("wsMsg");
-
-        // 连接成功
-        ws.onopen = function () {
-            wsStatus.innerHTML = "connected";
-        };
-
-        // 收到消息
-        ws.onmessage = function (ev) {
-            wsMsg.innerText = ev.data;
-        };
-
-        // 关闭
-        ws.onclose = function (ev) {
-            wsStatus.innerText = "closed";
-        };
-
-        // 出错
-        ws.onerror = function (ev) {
-            wsStatus.innerText = "error";
-        };
-
-        function sendMsg() {
-            var wsSendMsg = document.getElementById("wsSendMsg");
-            ws.send(wsSendMsg.value());
-        }
-
-    </script>
-
 </head>
 <body>
 
@@ -45,7 +12,49 @@
     msg: <span id="wsMsg"></span><br>
 </p>
 
-<input type="text" id="wsSendMsg">&nbsp;&nbsp;<button onclick="sendMsg()">send</button>
+<input type="text" id="wsSendMsg">&nbsp;&nbsp;
+<input type="number" id="wsSendTo">&nbsp;&nbsp;
+<button onclick="sendMsg()">send</button>
 
 </body>
+
+<script type="application/javascript">
+
+    var ws = new WebSocket("ws://localhost:8080/ws");
+    var wsStatus = document.getElementById("wsStatus");
+    var wsMsg = document.getElementById("wsMsg");
+
+    // 连接成功
+    ws.onopen = function () {
+        wsStatus.innerHTML = "connected";
+    };
+
+    // 收到消息
+    ws.onmessage = function (ev) {
+        wsMsg.innerText = ev.data;
+    };
+
+    // 关闭
+    ws.onclose = function (ev) {
+        wsStatus.innerText = "closed";
+    };
+
+    // 出错
+    ws.onerror = function (ev) {
+        wsStatus.innerText = "error";
+    };
+
+    function sendMsg() {
+        var wsSendMsg = document.getElementById("wsSendMsg");
+        var wsSendTo = document.getElementById("wsSendTo");
+        var msg = {
+            text: wsSendMsg.value,
+            to: wsSendTo.value
+        };
+
+        ws.send(JSON.stringify(msg));
+    }
+
+</script>
+
 </html>

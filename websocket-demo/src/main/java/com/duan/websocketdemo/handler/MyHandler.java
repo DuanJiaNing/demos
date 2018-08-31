@@ -5,7 +5,6 @@ import com.duan.websocketdemo.manager.MessageSender;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.*;
 
 import java.util.*;
@@ -16,14 +15,10 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author DuanJiaNing
  */
-@Slf4j
-@com.duan.websocketdemo.annotations.WebSocketHandler
+@Slf4j // 每次连接都会创建一个，不能用 DI 注入，除非使之为 static 成员
 public class MyHandler implements WebSocketHandler {
 
     public static Map<Long, Set<WebSocketSession>> userSocketSessionMap = new ConcurrentHashMap<>();
-
-    @Autowired
-    private MessageSender sender;
 
     @Override // 连接建立后回调
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -46,7 +41,7 @@ public class MyHandler implements WebSocketHandler {
         UserTextMessage msg = new Gson().fromJson(message.getPayload().toString(), UserTextMessage.class);
         msg.setDate(new Date());
 
-        sender.sendMessages(userSocketSessionMap.get(msg.getTo()),
+        MessageSender.sendMessages(userSocketSessionMap.get(msg.getTo()),
                 new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd-HH:mm:ss").create().toJson(msg)));
 
     }

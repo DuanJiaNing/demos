@@ -4,7 +4,6 @@ import com.duan.websocketdemo.entity.UserTextMessage;
 import com.duan.websocketdemo.handler.MyHandler;
 import com.duan.websocketdemo.manager.MessageSender;
 import com.google.gson.GsonBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -22,9 +21,6 @@ import java.util.Set;
 @RequestMapping("/socket")
 public class WebSocketMsgController {
 
-    @Autowired
-    private MessageSender sender;
-
     @PostMapping("/{fromUid}/send/{toUid}")
     public String send(@RequestParam("msg") String msg, @PathVariable Long toUid, @PathVariable Long fromUid) {
         UserTextMessage textMessage = new UserTextMessage();
@@ -34,7 +30,7 @@ public class WebSocketMsgController {
         textMessage.setText("[系统广播-发送给目标] " + msg);
 
         Set<WebSocketSession> sessions = MyHandler.userSocketSessionMap.get(textMessage.getTo());
-        sender.sendMessages(sessions,
+        MessageSender.sendMessages(sessions,
                 new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(textMessage)));
 
         return "send to " + textMessage.toString();
@@ -49,7 +45,7 @@ public class WebSocketMsgController {
 
         Set<WebSocketSession> sessions = new HashSet<>();
         MyHandler.userSocketSessionMap.values().forEach(sessions::addAll);
-        sender.broadcast(sessions,
+        MessageSender.broadcast(sessions,
                 new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(textMessage)));
 
         return "broadcast to " + textMessage.toString();
