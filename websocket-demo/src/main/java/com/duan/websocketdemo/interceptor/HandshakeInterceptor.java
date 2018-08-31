@@ -21,7 +21,7 @@ public class HandshakeInterceptor implements org.springframework.web.socket.serv
                                    WebSocketHandler webSocketHandler, Map<String, Object> attributes) throws Exception {
 
         Object uid = ((ServletServerHttpRequest) request).getServletRequest().getSession(false).getAttribute("uid");
-        log.info("Websocket: user [uid:" + uid + "] connected");
+        log.info("WebSocket: user [uid:" + uid + "] connected");
 
         if (uid != null) {
             // https://docs.spring.io/spring/docs/4.3.12.RELEASE/spring-framework-reference/htmlsingle/#websocket

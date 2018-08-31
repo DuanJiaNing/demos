@@ -7,6 +7,8 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created on 2018/8/30.
@@ -16,6 +18,12 @@ import java.util.Set;
 @Slf4j
 @Component
 public class MessageSender {
+
+    private static final ExecutorService executorService = Executors.newScheduledThreadPool(10, r -> {
+        Thread thread = new Thread(r);
+        thread.setDaemon(true);
+        return thread;
+    });
 
     public void sendMessages(Set<WebSocketSession> sessions, WebSocketMessage<?> message) {
 
@@ -28,5 +36,23 @@ public class MessageSender {
             }
         });
 
+    }
+
+
+    /**
+     * 给所有在线用户发送消息
+     */
+    public void broadcast(Set<WebSocketSession> sessions, WebSocketMessage<?> message) {
+
+        sessions.forEach(session -> executorService.execute(() -> {
+            if (session.isOpen()) {
+                try {
+                    session.sendMessage(message);
+                    log.debug("broadcast output:" + message.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }));
     }
 }

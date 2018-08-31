@@ -8,11 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.*;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 /**
  * Created on 2018/8/28.
@@ -23,7 +20,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 @com.duan.websocketdemo.annotations.WebSocketHandler
 public class MyHandler implements WebSocketHandler {
 
-    private static Map<Long, Set<WebSocketSession>> userSocketSessionMap = new ConcurrentHashMap<>();
+    public static Map<Long, Set<WebSocketSession>> userSocketSessionMap = new ConcurrentHashMap<>();
 
     @Autowired
     private MessageSender sender;
@@ -60,6 +57,11 @@ public class MyHandler implements WebSocketHandler {
         if (session.isOpen()) {
             session.close();
         }
+        removeSession(session);
+
+    }
+
+    private void removeSession(WebSocketSession session) {
 
         for (Map.Entry<Long, Set<WebSocketSession>> entry : userSocketSessionMap.entrySet()) {
             Long key = entry.getKey();
@@ -77,19 +79,7 @@ public class MyHandler implements WebSocketHandler {
 
     @Override // 连接关闭后回调
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-        //noinspection Duplicates
-        for (Map.Entry<Long, Set<WebSocketSession>> entry : userSocketSessionMap.entrySet()) {
-            Long key = entry.getKey();
-            Set<WebSocketSession> value = entry.getValue();
-
-            if (value.contains(session)) {
-                value.remove(session);
-                if (value.size() == 0) {
-                    userSocketSessionMap.remove(key);
-                    log.info("remove sessions for user " + key);
-                }
-            }
-        }
+        removeSession(session);
     }
 
     @Override // 是否处理分片消息
@@ -97,33 +87,4 @@ public class MyHandler implements WebSocketHandler {
         return false;
     }
 
-    /**
-     * 给所有在线用户发送消息
-     */
-    public void broadcast(final TextMessage message) throws IOException {
-        // 多线程群发
-        for (Set<WebSocketSession> item : userSocketSessionMap.values()) {
-            for (final WebSocketSession session : item) {
-                if (session.isOpen()) {
-                    ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1,
-                            new BasicThreadFactory.Builder().namingPattern("socket-schedule-pool-%d").daemon(true).build());
-                    for (int i = 0; i < 3; i++) {
-                        executorService.execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    if (session.isOpen()) {
-                                        logger.debug("broadcast output:" + message.toString());
-                                        session.sendMessage(message);
-                                    }
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-        }
-    }
 }
