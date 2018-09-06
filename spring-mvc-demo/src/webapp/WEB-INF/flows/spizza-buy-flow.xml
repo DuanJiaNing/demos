@@ -6,7 +6,7 @@
       start-state="identifyCustomer"> <!--指定开始状态，不指定默认第一个-->
 
     <!--流程内变量-->
-    <var name="order" class="com.duan.springmvcdemo.pizza.domain.Order"/>
+    <var name="order" class="com.duan.springmvcdemo.entity.pizza.Order"/>
 
     <!--识别顾客-->
     <subflow-state id="identifyCustomer" subflow="pizza/customer">

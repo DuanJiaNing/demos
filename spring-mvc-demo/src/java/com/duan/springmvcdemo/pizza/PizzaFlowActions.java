@@ -1,9 +1,9 @@
 package com.duan.springmvcdemo.pizza;
 
-import com.duan.springmvcdemo.pizza.domain.Customer;
-import com.duan.springmvcdemo.pizza.domain.Order;
-import com.duan.springmvcdemo.pizza.domain.Payment;
-import com.duan.springmvcdemo.pizza.domain.PaymentDetails;
+import com.duan.springmvcdemo.entity.pizza.Customer;
+import com.duan.springmvcdemo.entity.pizza.Order;
+import com.duan.springmvcdemo.entity.pizza.Payment;
+import com.duan.springmvcdemo.entity.pizza.PaymentDetails;
 import org.springframework.stereotype.Component;
 
 /**

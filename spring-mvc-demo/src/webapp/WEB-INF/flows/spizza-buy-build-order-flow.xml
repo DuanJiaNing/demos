@@ -14,8 +14,8 @@
 
     <view-state id="createPizza" model="flowScope.pizza" view="pizza/createPizza">
         <on-entry>
-            <set name="flowScope.pizza" value="new com.duan.springmvcdemo.pizza.domain.Pizza()"/>
-            <evaluate expression="T(com.duan.springmvcdemo.pizza.domain.Topping).asList()"
+            <set name="flowScope.pizza" value="new com.duan.springmvcdemo.entity.pizza.Pizza()"/>
+            <evaluate expression="T(com.duan.springmvcdemo.pizza.enums.Topping).asList()"
                       result="viewScope.toppingsList"/>
         </on-entry>
         <transition on="addPizza" to="showOrder">

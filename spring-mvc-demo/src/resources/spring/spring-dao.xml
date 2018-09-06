@@ -34,8 +34,8 @@
         <!-- 配置MyBaties全局配置文件:mybatis-config.xml -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!-- 扫描entity包 使用别名 -->
-        <property name="typeAliasesPackage" value="com.duan.mpi.entity"/>
+        <property name="typeAliasesPackage" value="com.duan.springmvcdemo.entity"/>
         <!-- 扫描sql配置文件:mapper需要的xml文件 -->
-        <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
 </beans>

@@ -1,6 +1,6 @@
 package com.duan.springmvcdemo.spittle.controller;
 
-import com.duan.springmvcdemo.spittle.entity.Spittle;
+import com.duan.springmvcdemo.entity.spittle.Spittle;
 import com.duan.springmvcdemo.spittle.exceptions.DuplicateSpittleException;
 import com.duan.springmvcdemo.spittle.exceptions.SpittleException;
 import org.springframework.stereotype.Controller;

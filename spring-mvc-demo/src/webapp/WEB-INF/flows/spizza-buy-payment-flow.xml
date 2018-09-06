@@ -7,8 +7,8 @@
     <input name="order" required="true"/>
     <view-state id="takePayment" model="flowScope.paymentDetails">
         <on-entry>
-            <set name="flowScope.paymentDetails" value="new com.duan.springmvcdemo.pizza.domain.PaymentDetails()"/>
-            <evaluate expression="T(com.duan.springmvcdemo.pizza.domain.PaymentType).asList()"
+            <set name="flowScope.paymentDetails" value="new com.duan.springmvcdemo.entity.pizza.PaymentDetails()"/>
+            <evaluate expression="T(com.duan.springmvcdemo.pizza.enums.PaymentType).asList()"
                       result="viewScope.paymentTypeList"/>
         </on-entry>
         <transition on="paymentSubmitted" to="verifyPayment"/>

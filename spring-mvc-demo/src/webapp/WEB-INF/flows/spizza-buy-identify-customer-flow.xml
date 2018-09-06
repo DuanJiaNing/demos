@@ -4,7 +4,7 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
       http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-    <var name="customer" class="com.duan.springmvcdemo.pizza.domain.Customer"/>
+    <var name="customer" class="com.duan.springmvcdemo.entity.pizza.Customer"/>
 
     <view-state id="welcome" view="pizza/welcome">
         <transition on="phoneEntered" to="lookupCustomer"/>

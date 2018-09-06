@@ -1,4 +1,4 @@
-package com.duan.springmvcdemo.pizza.domain;
+package com.duan.springmvcdemo.pizza.enums;
 
 import java.util.Arrays;
 import java.util.List;

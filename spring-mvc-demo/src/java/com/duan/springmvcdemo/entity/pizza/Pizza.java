@@ -1,4 +1,6 @@
-package com.duan.springmvcdemo.pizza.domain;
+package com.duan.springmvcdemo.entity.pizza;
+
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -7,5 +9,6 @@ import java.io.Serializable;
  *
  * @author DuanJiaNing
  */
+@Data
 public class Pizza implements Serializable {
 }
