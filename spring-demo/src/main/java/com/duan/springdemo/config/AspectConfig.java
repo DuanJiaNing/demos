@@ -1,4 +1,4 @@
-package com.duan.springdemo.aspect;
+package com.duan.springdemo.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ImportResource;
  */
 @Configuration
 //@EnableAspectJAutoProxy // 使用 xml
-@ImportResource("classpath:spring-aop.xml")
+//@ImportResource("classpath:spring-aop.xml")
 public class AspectConfig {
 
 }
