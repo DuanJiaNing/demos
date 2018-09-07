@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface SpittlesRepository {
 
-    List<Spittle> findSpittles(long max, int count);
+    List<Spittle> findSpittles();
 
 }
