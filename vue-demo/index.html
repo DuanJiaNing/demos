@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+	<title>Vue 入门</title>
+	<!-- 面向数据编程 -->
+	<script type="text/javascript" src="./vue.js"></script>
+
+</head>
+<body>
+   
+   <!-- 挂载点 -->
+   <div id="root">
+   <!-- 模板内容 -->
+      <h1>{{msg}}</h1><!-- 插值表达式 -->
+      <h1 v-text="msg"></h1>
+      
+      <!-- 事件绑定 v-on: 可简写为 @ -->
+      <div v-html="content" v-on:click="handleClick"></div>
+      <h1 v-text="content"></h1><!-- 进行转意 -->
+
+      <h2>{{code}}</h2>
+
+   </div>
+   <script type="text/javascript">
+       new Vue({ // 实例
+           el: "#root", // 挂载点
+           // template: '<h1>{{msg}}</h1>', 模板内容
+           data: {
+           	   msg: "Hello world",
+           	   content: "<h3>hello</h3>&nbsp;world",
+           	   code: 1
+           },
+           methods: { // 定义方法
+           	   handleClick: function() {
+           	   	   this.content = '<h3>你好</h3>&nbsp;世界' // 操作数据就是操作 dom
+           	   }
+           }
+       })	
+   </script>
+<hr>
+
+
+
+   <div id="root2"> 
+
+   	   <div title="this is hello world">hello world</div>
+   	   <!-- 数据绑定 v-bind 可简写为 : -->
+   	   <div v-bind:title="msg">hello world</div>
+        
+       <!-- 数据双向绑定  -->
+       <input v-model="content">
+       <div>{{content}}</div>
+   </div>	
+
+   <script type="text/javascript">
+   	   new Vue({
+   	   	   el: "#root2",
+   	   	   data: {
+   	   	   	   msg: "这是 hello world",
+   	   	   	   content: "this is a content"
+   	   	   }
+   	   })
+   </script>
+<hr>
+
+
+
+    <div id="root3">
+
+       名<input v-model="firstname">
+       姓<input v-model="lastname">
+       <div>{{fullName}}</div>
+       <span>{{count}}</span>
+    </div>
+
+    <script type="text/javascript">
+    	new Vue({
+    		el: "#root3",
+    		data: {
+    			firstname: '',
+    			lastname: '',
+    			count: 0
+    		},
+    		computed: {
+    			fullName: function() { 
+    			// 属性（一个属性通过其他属性值计算而得，依赖数据不改变时会使用缓存值）
+    				return this.firstname + ' ' + this.lastname
+    			}
+    		},
+    		watch: {
+    			firstname: function() { // 监听器，监听数据变化，数据变化就会回调
+    				this.count++
+    			},
+    			lastname: function() {
+    				this.count++
+    			}
+
+    		}
+
+    	})
+    </script>
+<h1>
+
+
+
+    <div id="root4">
+       <div v-if="show">hello world</div> <!-- 清除 dom -->
+       <div v-show="show">hello world</div> <!-- 隐藏 dom -->
+       <button @click="handleShowClick">toggle</button>
+       <ul> <!-- 遍历 list 变量到 item 中 -->
+       	   <li v-for="(item,index) of list" :key="index">{{item}}&nbsp;{{index}}</li>
+       </ul>
+    </div>
+
+    <script type="text/javascript">
+    	new Vue({
+    		el: "#root4",
+    		data: {
+    			show: true,
+    			list: [1,2,3,3,12]
+    		},
+    		methods: {
+    			handleShowClick: function() {
+    				this.show = !this.show
+    			}
+    		}
+    	})
+    </script>
+<h1>
+
+
+</body>
+</html>
