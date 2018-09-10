@@ -5,6 +5,7 @@ import com.duan.websocketdemo.manager.MessageSender;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.socket.*;
 
 import java.util.*;
@@ -41,8 +42,11 @@ public class MyHandler implements WebSocketHandler {
         UserTextMessage msg = new Gson().fromJson(message.getPayload().toString(), UserTextMessage.class);
         msg.setDate(new Date());
 
-        MessageSender.sendMessages(userSocketSessionMap.get(msg.getTo()),
-                new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd-HH:mm:ss").create().toJson(msg)));
+        Set<WebSocketSession> sessions = userSocketSessionMap.get(msg.getTo());
+        if (!CollectionUtils.isEmpty(sessions)) {
+            MessageSender.sendMessages(sessions,
+                    new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd-HH:mm:ss").create().toJson(msg)));
+        }
 
     }
 

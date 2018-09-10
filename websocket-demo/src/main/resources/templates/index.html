@@ -31,17 +31,17 @@
 
     // 收到消息
     ws.onmessage = function (ev) {
-        wsMsg.innerText = ev.data;
+        wsMsg.innerHTML = wsMsg.innerHTML + "<br>" + ev.data;
     };
 
     // 关闭
     ws.onclose = function (ev) {
-        wsStatus.innerText = "closed";
+        wsStatus.innerHTML = "closed";
     };
 
     // 出错
     ws.onerror = function (ev) {
-        wsStatus.innerText = "error";
+        wsStatus.innerHTML = "error";
     };
 
     function sendMsg() {
