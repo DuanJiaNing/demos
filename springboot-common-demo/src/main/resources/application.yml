@@ -1,0 +1,6 @@
+server:
+  port: 9090
+
+app:
+  auth: duan
+  name: spring-boot-common-demo

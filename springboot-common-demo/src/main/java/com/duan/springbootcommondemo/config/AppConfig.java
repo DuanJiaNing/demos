@@ -1,4 +1,4 @@
-package com.duan.springbootcommondemo;
+package com.duan.springbootcommondemo.config;
 
 import org.springframework.context.annotation.Configuration;
 
