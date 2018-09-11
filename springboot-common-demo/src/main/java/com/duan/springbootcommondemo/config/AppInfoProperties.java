@@ -2,7 +2,6 @@ package com.duan.springbootcommondemo.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
@@ -12,9 +11,9 @@ import java.io.Serializable;
  * @author DuanJiaNing
  */
 @Data
-@Component
+//@Component 不能注册为 bean，否则会有两个 bean
 @ConfigurationProperties(prefix = "app")
-public class AppInfo implements Serializable {
+public class AppInfoProperties implements Serializable {
 
     private String auth;
 

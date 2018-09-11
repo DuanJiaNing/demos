@@ -2,15 +2,13 @@ package com.duan.springbootcommondemo.service;
 
 import com.duan.springbootcommondemo.config.AppInfoProperties;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
- * Created on 2018/9/10.
+ * Created on 2018/9/11.
  *
  * @author DuanJiaNing
  */
-@Service
-public class AppService {
+public class AppInfoService {
 
     @Autowired
     private AppInfoProperties appInfoProperties;

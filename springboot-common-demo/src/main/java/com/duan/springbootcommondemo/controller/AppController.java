@@ -1,6 +1,6 @@
 package com.duan.springbootcommondemo.controller;
 
-import com.duan.springbootcommondemo.config.AppInfo;
+import com.duan.springbootcommondemo.config.AppInfoProperties;
 import com.duan.springbootcommondemo.rest.ResultModel;
 import com.duan.springbootcommondemo.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class AppController {
     private AppService appService;
 
     @GetMapping("/info")
-    public ResultModel<AppInfo> getAppInfo() {
-        return new ResultModel<>(appService.getAppInfo());
+    public ResultModel<AppInfoProperties> getAppInfo() {
+        return new ResultModel<>(appService.getAppInfoProperties());
     }
 
 }
