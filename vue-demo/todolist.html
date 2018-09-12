@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>TodoList</title>
+	<script type="text/javascript" src="./vue.js"></script>
+
+</head>
+<body>
+	
+	<div id="root">
+		<div>
+			<input v-model="inputValue"/>
+			<button @click="handleClick">提交</button>
+		</div>
+		<ul>
+			<li v-for="(item,index) of list" :key="index">
+				{{item}}
+			</li>
+		</ul>
+
+		------<br>
+		<!-- 将 item 赋值给 content 以作为参数传递给模板 -->
+		<todo-item v-for="(item,index) of list"
+		:key="index"
+		:content="item"
+		:index="index"
+		@delete="handleDelete"></todo-item> <!-- 监听 delete 事件 -->
+		<var-todo-item></var-todo-item>
+	</div>
+
+    <script>
+
+        // 定义全局组件
+    	Vue.component('todo-item', {
+    		props: ['content','index'], // 接收外部参数，作为当前组件的数据（data）
+    		template: '<li @click="remove">{{index}} {{content}}</li>',
+    		methods: { // 一个组件就为一个 Vue 实例，可以有自己的 methods
+    			remove: function(index) { // 子组件向外部发布 delete 事件，传值 index 
+    				this.$emit('delete',this.index)
+    			}
+    		}
+    	})
+
+        // 定义局部组件
+        var todoItem = {
+        	template: '<li>var-todo-item</li>'
+        }
+        
+    	new Vue({
+    		el: '#root',
+    		components: {
+    			'var-todo-item': todoItem // 声明（注册）组件，已在该实例中使用该组件
+    		},
+    		data: {
+    			inputValue: '',
+    			list: []
+    		},
+    		methods: {
+    			handleClick: function() {
+    				this.list.push(this.inputValue) // this 一定要加
+    				this.inputValue = ''
+    			},
+    			handleDelete: function(index) {
+    				this.list.splice(index, 1)
+    			}
+    		}
+    	})
+    </script>
+
+</body>
+</html>
