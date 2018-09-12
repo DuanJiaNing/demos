@@ -1,7 +1,11 @@
 server:
   port: 9090
+  tomcat:
+    uri-encoding: UTF-8
 
 app:
   auth: duan
   name: spring-boot-common-demo
   enable: true
+
+
