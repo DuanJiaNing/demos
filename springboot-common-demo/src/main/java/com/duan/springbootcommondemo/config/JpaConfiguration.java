@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @author DuanJiaNing
  */
 @Configuration
-@EnableJpaRepositories("com.duan.springbootcommondemo.dto")
+@EnableJpaRepositories("com.duan.springbootcommondemo.dao")
 public class JpaConfiguration {
+
 }
