@@ -27,7 +27,7 @@ public class EchoServerInboundHandler extends ChannelInboundHandlerAdapter {
         Logger.info(log, "channelActive", "ctx = " + ctx);
     }
 
-    // 每个信息入站都会调用
+    // 每个信息入站都会调用 (信息发送给客户端)
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 

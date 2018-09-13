@@ -2,6 +2,7 @@ package com.duan.nettydemo.echo.client;
 
 import com.duan.nettydemo.Logger;
 import com.duan.nettydemo.echo.Const;
+import com.duan.nettydemo.echo.client.handler.EchoClientInboundFilterHandler;
 import com.duan.nettydemo.echo.client.handler.EchoClientInboundHandler;
 import com.duan.nettydemo.echo.client.handler.EchoClientOutboundHandler;
 import io.netty.bootstrap.Bootstrap;
@@ -45,6 +46,7 @@ public class EchoClient {
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
                             ch.pipeline()
+                                    .addLast(new EchoClientInboundFilterHandler()) // 在 piepeline 中按该顺序传递处理
                                     .addLast(new EchoClientInboundHandler())
                                     .addLast(new EchoClientOutboundHandler());
                         }

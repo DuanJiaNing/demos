@@ -25,7 +25,8 @@ package com.duan.nettydemo;
 5. ChannelFuture: Netty 所有的 I/O 操作都是异步。因为一个操作可能无法立即返回，我们需要有一种方法在以后确定它的结果。出于
    这个目的，Netty 提供了接口 ChannelFuture,它的 addListener 方法注册了一个 ChannelFutureListener ，当操作完成时，可以被
    通知（不管成功与否）
-
+6. ChannelHandlerContext: 它代表一个 ChannelHandler 和 ChannelPipeline 之间的 "绑定", 一个事件可以通过使用 ChanneHandlerContext
+   被转发到下一个处理器
 
 outbound 若数据是从用户应用程序到远程主机则是 "出站"
 inbound 相反若数据从远程主机到用户应用程序则是 "入站"。

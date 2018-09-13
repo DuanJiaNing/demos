@@ -3,6 +3,7 @@ package com.duan.nettydemo.echo.server;
 import com.duan.nettydemo.Logger;
 import com.duan.nettydemo.echo.Const;
 import com.duan.nettydemo.echo.server.handler.EchoServerInboundHandler;
+import com.duan.nettydemo.echo.server.handler.EchoServerOutboundHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -49,7 +50,9 @@ public class EchoService {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             // ChannelInitializer 会将 EchoServerInboundHandler 添加到 pipeline 中
-                            ch.pipeline().addLast(new EchoServerInboundHandler());
+                            ch.pipeline()
+                                    .addLast(new EchoServerOutboundHandler())
+                                    .addLast(new EchoServerInboundHandler());
                         }
                     });
 
