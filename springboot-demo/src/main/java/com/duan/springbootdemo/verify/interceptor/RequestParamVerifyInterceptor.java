@@ -96,14 +96,16 @@ public class RequestParamVerifyInterceptor extends HandlerInterceptorAdapter {
         }
 
         for (MethodParameter parameter : parameters) {
+            // ParamVerify
             ParamVerify annotation = parameter.getMethodAnnotation(ParamVerify.class);
             if (annotation != null && !verifyParam(annotation.rule(), getParamValue(request, handle, parameter))) {
                 verifyFail(request, response, handle, parameter);
                 return false;
             }
 
+            // ParamValueVerify
             ParamValueVerify valueVerify = parameter.getMethodAnnotation(ParamValueVerify.class);
-            if (valueVerify != null && !verifyParam(valueVerify.valueMapping().rule(),
+            if (valueVerify != null && !verifyParamValue(valueVerify.valueMapping().rule(),
                     getParamValue(request, handle, parameter), valueVerify.valueMapping().value())) {
                 verifyFail(request, response, handle, parameter);
                 return false;
@@ -112,17 +114,20 @@ public class RequestParamVerifyInterceptor extends HandlerInterceptorAdapter {
 
         // 方法校验注解
         Method method = handle.getMethod();
+        // RequestParamVerify
         RequestParamVerify paramVerify = method.getAnnotation(RequestParamVerify.class);
         if (paramVerify != null && !verifyParam(paramVerify.rule(), getParamValue(request, handle, paramVerify.param()))) {
             return false;
         }
 
+        // RequestParamValueVerify
         RequestParamValueVerify paramValueVerify = method.getAnnotation(RequestParamValueVerify.class);
-        if (paramValueVerify != null && !verifyParam(paramValueVerify.rule(),
+        if (paramValueVerify != null && !verifyParamValue(paramValueVerify.rule(),
                 getParamValue(request, handle, paramValueVerify.param()), paramValueVerify.value())) {
             return false;
         }
 
+        // RequestParamsVerify
         RequestParamsVerify paramsVerify = method.getAnnotation(RequestParamsVerify.class);
         if (paramsVerify != null) {
             RequestParamVerify[] verifies = paramsVerify.value();
@@ -135,12 +140,13 @@ public class RequestParamVerifyInterceptor extends HandlerInterceptorAdapter {
             }
         }
 
+        // RequestParamsValueVerify
         RequestParamsValueVerify paramsValueVerify = method.getAnnotation(RequestParamsValueVerify.class);
         if (paramsValueVerify != null) {
             RequestParamValueVerify[] verifies = paramsValueVerify.valueMapping();
             if (verifies.length != 0) {
                 for (RequestParamValueVerify verify : verifies) {
-                    if (!verifyParam(verify.rule(), getParamValue(request, handle, verify.param()), verify.value())) {
+                    if (!verifyParamValue(verify.rule(), getParamValue(request, handle, verify.param()), verify.value())) {
                         return false;
                     }
                 }
@@ -159,11 +165,61 @@ public class RequestParamVerifyInterceptor extends HandlerInterceptorAdapter {
         return request.getParameter(parame);
     }
 
-    private boolean verifyParam(VerifyValueRule rule, String paramValue, String desValue) {
+    private boolean verifyParamValue(VerifyValueRule rule, String paramValue, String desValue) {
+
+        switch (rule) {
+            case NON:
+                break;
+            case VALUE_EQUAL:
+                break;
+            case VALUE_GREATER_THAN:
+                break;
+            case VALUE_NOT_GREATER_THAN:
+                break;
+            case VALUE_LESS_THAN:
+                break;
+            case VALUE_NOT_LESS_THAN:
+                break;
+            case TEXT_REGEX:
+                break;
+            case TEXT_LENGTH_EQUAL:
+                break;
+            case TEXT_LENGTH_GREATER_THAN:
+                break;
+            case TEXT_LENGTH_NOT_GREATER_THAN:
+                break;
+            case TEXT_LENGTH_LESS_THAN:
+                break;
+            case TEXT_LENGTH_NOT_LESS_THAN:
+                break;
+            case COLLECTION_SIZE_GREATER_THAN:
+                break;
+            case COLLECTION_SIZE_NOT_GREATER_THAN:
+                break;
+            case COLLECTION_SIZE_LESS_THAN:
+                break;
+            case COLLECTION_SIZE_NOT_LESS_THAN:
+                break;
+            case COLLECTION_SIZE_EQUAL:
+                break;
+        }
+
         return false;
     }
 
     private boolean verifyParam(VerifyRule rule, String paramValue) {
+
+        switch (rule) {
+            case NOT_NULL:
+                return paramValue != null;
+            case NOT_EMPTY:
+                break;
+            case NOT_BLANK:
+                break;
+            case NON_NEGATIVE:
+                break;
+        }
+
         return false;
     }
 
