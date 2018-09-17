@@ -4,7 +4,7 @@ import com.duan.springbootdemo.domain.Org;
 import com.duan.springbootdemo.domain.Result;
 import com.duan.springbootdemo.repository.OrgRepository;
 import com.duan.springbootdemo.verify.VerifyRule;
-import com.duan.springbootdemo.verify.annoation.RequestParamVerify;
+import com.duan.springbootdemo.verify.annoation.ParamVerify;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -51,11 +51,14 @@ public class OrgController {
     }
 
     @PutMapping("/{id}")
-    @RequestParamVerify(param = "name", rule = VerifyRule.NOT_NULL)
-    public Org updateOrg(@PathVariable Integer id,
-                         @RequestParam String name,
-                         @RequestParam Integer number,
-                         @RequestParam String intro) {
+//    @RequestParamVerify(param = "name", rule = VerifyRule.NOT_BLANK)
+    public Org updateOrg(
+            @PathVariable
+            @ParamVerify(rule = VerifyRule.NON_NEGATIVE)
+                    Integer id,
+            @RequestParam String name,
+            @RequestParam Integer number,
+            @RequestParam String intro) {
         Org org = new Org();
         org.setId(id);
         org.setIntro(intro);

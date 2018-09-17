@@ -1,6 +1,5 @@
 package com.duan.springbootdemo.config;
 
-import com.duan.springbootdemo.verify.interceptor.RequestParamVerifyInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -19,8 +18,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequestParamVerifyInterceptor())
-                .addPathPatterns("/**");
         super.addInterceptors(registry);
     }
 
