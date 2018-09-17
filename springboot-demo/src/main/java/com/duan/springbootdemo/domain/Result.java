@@ -25,4 +25,15 @@ public class Result<T> {
      */
     private T data;
 
+    public Result(String msg) {
+        this.msg = msg;
+    }
+
+    public Result(String msg, T data) {
+        this.msg = msg;
+        this.data = data;
+    }
+
+    public Result() {
+    }
 }

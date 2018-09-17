@@ -42,5 +42,36 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         source.registerCorsConfiguration("/**", buildConfig());
         return new CorsFilter(source);
     }
+//
+//    @Bean
+//    public HttpMessageConverter stringHttpMessageConverter() {
+//        return new StringHttpMessageConverter();
+//    }
+//
+//    @Bean
+//    public HttpMessageConverter mappingJackson2HttpMessageConverter() {
+//        return new MappingJackson2HttpMessageConverter();
+//    }
+//
+//    @Bean
+//    public FastJsonConfig fastJsonConfig() {
+//        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+//        SerializerFeature writeMapNullValue = SerializerFeature.WriteMapNullValue;
+//        SerializerFeature WriteNullStringAsEmpty = SerializerFeature.WriteNullStringAsEmpty;
+//        SerializerFeature WriteNullNumberAsZero = SerializerFeature.WriteNullNumberAsZero;
+//        SerializerFeature WriteNullListAsEmpty = SerializerFeature.WriteNullListAsEmpty;
+//        fastJsonConfig.setSerializerFeatures(writeMapNullValue, WriteNullStringAsEmpty,
+//                WriteNullNumberAsZero, WriteNullListAsEmpty);
+//        return fastJsonConfig;
+//    }
+//
+//    @Bean
+//    public HttpMessageConverters fastJsonHttpMessageConverters(
+//            @Qualifier("fastJsonConfig") FastJsonConfig fastJsonConfig) {
+//        FastJsonHttpMessageConverter4 fastConverter = new FastJsonHttpMessageConverter4();
+//        fastConverter.setFastJsonConfig(fastJsonConfig);
+//        HttpMessageConverter<?> converter = fastConverter;
+//        return new HttpMessageConverters(converter);
+//    }
 
 }
