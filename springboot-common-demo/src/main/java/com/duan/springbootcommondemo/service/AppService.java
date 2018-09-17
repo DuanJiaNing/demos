@@ -18,4 +18,5 @@ public class AppService {
     public AppInfoProperties getAppInfoProperties() {
         return appInfoProperties;
     }
+
 }

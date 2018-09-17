@@ -12,9 +12,12 @@ import java.io.Serializable;
 @Data
 public class ResultModel<T extends Serializable> implements Serializable {
 
-    private int code = 200;
+    private static final int succCode = 200;
+    private static final int failCode = 500;
+
     private String message;
     private T data;
+    private Integer code;
 
     // success
     public ResultModel(T data) {
@@ -35,4 +38,9 @@ public class ResultModel<T extends Serializable> implements Serializable {
         this.code = code;
         this.message = message;
     }
+
+    public static ResultModel fail() {
+        return new ResultModel(failCode);
+    }
+
 }

@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @Configuration
 @EnableJpaRepositories("com.duan.springbootcommondemo.dao")
+//@EnableTransactionManagement // 开启声明式事务，扫描 @Transactional spring boot 自动进行配置
 public class JpaConfiguration {
 
 }
