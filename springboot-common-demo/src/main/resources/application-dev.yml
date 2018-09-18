@@ -22,3 +22,10 @@ spring:
     host: 127.0.0.1
     password:
     port: 6379
+    pool:
+      maxTotal: 1024
+      maxIdle: 200
+      maxWait: 1000
+      testOnBorrow: true
+      testOnReturn: true
+    timeout: 0
