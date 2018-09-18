@@ -1,4 +1,4 @@
-package com.duan.springbootdemo.verify.annoation;
+package com.duan.springbootdemo.verify.annoation.method;
 
 import com.duan.springbootdemo.verify.VerifyRule;
 
@@ -9,13 +9,17 @@ import java.lang.annotation.Target;
 
 /**
  * Created on 2018/9/14.
- * 限定 controller 处理器方法具体参数的校验规则
  *
  * @author DuanJiaNing
  */
-@Retention(value = RetentionPolicy.RUNTIME)
-@Target(value = ElementType.PARAMETER)
-public @interface ParamVerify {
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface RequestParamVerify {
+
+    /**
+     * 需要进行校验的参数名
+     */
+    String param();
 
     /**
      * 校验规则

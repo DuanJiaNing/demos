@@ -1,4 +1,6 @@
-package com.duan.springbootdemo.verify.annoation;
+package com.duan.springbootdemo.verify.annoation.method;
+
+import com.duan.springbootdemo.verify.annoation.ParamVerifyComposite;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,11 +14,11 @@ import java.lang.annotation.Target;
  */
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = ElementType.METHOD)
-public @interface RequestParamsVerify {
+public @interface RequestParamsVerifyComposite {
 
     /**
-     * 需要校验的参数与规则映射
+     * 需要校验的参数、比对的值与规则映射
      */
-    RequestParamVerify[] value();
+    ParamVerifyComposite[] value();
 
 }

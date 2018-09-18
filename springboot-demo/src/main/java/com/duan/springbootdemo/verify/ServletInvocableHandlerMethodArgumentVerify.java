@@ -1,9 +1,11 @@
-package com.duan.springbootdemo.resolver;
+package com.duan.springbootdemo.verify;
 
+import com.duan.springbootdemo.config.WebConfig;
 import com.duan.springbootdemo.domain.Result;
-import com.duan.springbootdemo.verify.VerifyRule;
-import com.duan.springbootdemo.verify.VerifyValueRule;
-import com.duan.springbootdemo.verify.annoation.*;
+import com.duan.springbootdemo.verify.annoation.ParamVerifyComposite;
+import com.duan.springbootdemo.verify.annoation.method.*;
+import com.duan.springbootdemo.verify.annoation.parameter.ParamValueVerify;
+import com.duan.springbootdemo.verify.annoation.parameter.ParamVerify;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod;
@@ -14,8 +16,10 @@ import java.util.Collection;
 
 /**
  * Created on 2018/9/17.
+ * 使用自定义注解对 controller 的 HandlerMethod 进行参数验证
  *
  * @author DuanJiaNing
+ * @see WebConfig#getRequestMappingHandlerAdapter()
  */
 public class ServletInvocableHandlerMethodArgumentVerify extends ServletInvocableHandlerMethod {
 
@@ -39,18 +43,18 @@ public class ServletInvocableHandlerMethodArgumentVerify extends ServletInvocabl
         return super.doInvoke(args);
     }
 
-    private Object warpResultFail(HandleResult result) {
+    private Result warpResultFail(HandleResult result) {
+
+        String rule = "";
         if (result.rule instanceof VerifyRule) {
-            VerifyRule rule = (VerifyRule) result.rule;
-            return new Result<>(rule.name(), result.value);
+            rule = ((VerifyRule) result.rule).name();
         }
 
         if (result.rule instanceof VerifyValueRule) {
-            VerifyValueRule rule = (VerifyValueRule) result.rule;
-            return new Result<>(rule.name(), result.value);
+            rule = ((VerifyValueRule) result.rule).name();
         }
 
-        return null;
+        return new Result<>(rule + ": argument [" + result.parameter.getParameterName() + "] can't be ['" + result.value + "']");
     }
 
     // args 顺序对应 HandlerMethod.getMethodParameters() 顺序
@@ -65,7 +69,7 @@ public class ServletInvocableHandlerMethodArgumentVerify extends ServletInvocabl
 
         for (int i = 0; i < parameters.length; i++) {
             MethodParameter parameter = parameters[i];
-            Object value = args[i];
+            Object value = args[i]; // 已经过 spring 转换的参数
 
             // ParamVerify
             if (parameter.hasParameterAnnotation(ParamVerify.class)) {
@@ -78,9 +82,8 @@ public class ServletInvocableHandlerMethodArgumentVerify extends ServletInvocabl
             // ParamValueVerify
             if (parameter.hasParameterAnnotation(ParamValueVerify.class)) {
                 ParamValueVerify annotation = parameter.getParameterAnnotation(ParamValueVerify.class);
-                if (!verifyParamValue(annotation.valueMapping().rule(), value,
-                        annotation.valueMapping().value())) {
-                    return new HandleResult(parameter, value, annotation, annotation.valueMapping().rule());
+                if (!verifyParamValue(annotation.rule(), value, annotation.value())) {
+                    return new HandleResult(parameter, value, annotation, annotation.rule());
                 }
             }
         }
@@ -126,7 +129,7 @@ public class ServletInvocableHandlerMethodArgumentVerify extends ServletInvocabl
         // RequestParamsValueVerify
         if (handlerMethod.hasMethodAnnotation(RequestParamsValueVerify.class)) {
             RequestParamsValueVerify annotation = method.getAnnotation(RequestParamsValueVerify.class);
-            RequestParamValueVerify[] verifies = annotation.valueMapping();
+            RequestParamValueVerify[] verifies = annotation.value();
             if (verifies.length != 0) {
                 for (RequestParamValueVerify verify : verifies) {
                     MethodParameter parameter = getParam(handlerMethod, verify.param());
@@ -134,6 +137,38 @@ public class ServletInvocableHandlerMethodArgumentVerify extends ServletInvocabl
                     if (parameter != null && !verifyParamValue(verify.rule(), paramValue, verify.value())) {
                         return new HandleResult(parameter, paramValue, annotation, verify.rule());
                     }
+                }
+            }
+        }
+
+        // RequestParamsVerifyComposite
+        if (handlerMethod.hasMethodAnnotation(RequestParamsVerifyComposite.class)) {
+            RequestParamsVerifyComposite annotation = method.getAnnotation(RequestParamsVerifyComposite.class);
+            ParamVerifyComposite[] verifies = annotation.value();
+            if (verifies.length != 0) {
+                for (ParamVerifyComposite verify : verifies) {
+                    RequestParamVerify value = verify.value();
+                    RequestParamValueVerify valueVerify = verify.valueVerify();
+                    if (value.param().equals("") && valueVerify.param().equals("")) {
+                        continue;
+                    }
+
+                    if (!valueVerify.param().equals("")) { // 若两者都指定只校验 valueVerify
+
+                        MethodParameter parameter = getParam(handlerMethod, valueVerify.param());
+                        Object paramValue = getParamValue(handlerMethod, valueVerify.param(), args);
+                        if (parameter != null && !verifyParamValue(valueVerify.rule(), paramValue, valueVerify.value())) {
+                            return new HandleResult(parameter, paramValue, valueVerify, valueVerify.rule());
+                        }
+                    } else {
+
+                        MethodParameter parameter = getParam(handlerMethod, value.param());
+                        Object paramValue = getParamValue(handlerMethod, value.param(), args);
+                        if (parameter != null && !verifyParam(value.rule(), paramValue)) {
+                            return new HandleResult(parameter, paramValue, value, value.rule());
+                        }
+                    }
+
                 }
             }
         }
@@ -180,43 +215,140 @@ public class ServletInvocableHandlerMethodArgumentVerify extends ServletInvocabl
         return null;
     }
 
-    private boolean verifyParamValue(VerifyValueRule rule, Object paramValue, Object verifyValue) {
+    @SuppressWarnings("unchecked")
+    private boolean verifyParamValue(VerifyValueRule rule, Object paramValue, String verifyValue) {
+        if (paramValue == null)
+            return false;
 
         switch (rule) {
-            case NON:
-                break;
-            case VALUE_EQUAL:
-                break;
+            case EQUAL: {
+                // 依赖于对象的 toString 方法
+                return verifyValue.equals(paramValue.toString());
+            }
+            case OBJECT_EQUAL:
+                return paramValue == verifyValue;
+
+            // 依赖于 Comparable 接口
             case VALUE_GREATER_THAN:
+                if (paramValue instanceof Number) {
+                    return ((Number) paramValue).doubleValue() > Double.valueOf(verifyValue);
+                }
                 break;
             case VALUE_NOT_GREATER_THAN:
+                if (paramValue instanceof Number) {
+                    return ((Number) paramValue).doubleValue() <= Double.valueOf(verifyValue);
+                }
                 break;
             case VALUE_LESS_THAN:
+                if (paramValue instanceof Number) {
+                    return ((Number) paramValue).doubleValue() < Double.valueOf(verifyValue);
+                }
                 break;
             case VALUE_NOT_LESS_THAN:
+                if (paramValue instanceof Number) {
+                    return ((Number) paramValue).doubleValue() >= Double.valueOf(verifyValue);
+                }
                 break;
             case TEXT_REGEX:
+                if (paramValue instanceof CharSequence) {
+                    return String.valueOf(paramValue).matches(verifyValue);
+                }
                 break;
             case TEXT_LENGTH_EQUAL:
+                if (paramValue instanceof CharSequence) {
+                    return ((CharSequence) paramValue).length() == Integer.valueOf(verifyValue);
+                }
                 break;
             case TEXT_LENGTH_GREATER_THAN:
+                if (paramValue instanceof CharSequence) {
+                    return ((CharSequence) paramValue).length() > Integer.valueOf(verifyValue);
+                }
                 break;
             case TEXT_LENGTH_NOT_GREATER_THAN:
+                if (paramValue instanceof CharSequence) {
+                    return ((CharSequence) paramValue).length() <= Integer.valueOf(verifyValue);
+                }
                 break;
             case TEXT_LENGTH_LESS_THAN:
+                if (paramValue instanceof CharSequence) {
+                    return ((CharSequence) paramValue).length() < Integer.valueOf(verifyValue);
+                }
                 break;
             case TEXT_LENGTH_NOT_LESS_THAN:
+                if (paramValue instanceof CharSequence) {
+                    return ((CharSequence) paramValue).length() >= Integer.valueOf(verifyValue);
+                }
                 break;
-            case COLLECTION_SIZE_GREATER_THAN:
+            case COLLECTION_SIZE_GREATER_THAN: {
+                Integer vLen = Integer.valueOf(verifyValue);
+                // Collection
+                if (paramValue instanceof Collection) {
+                    Collection coll = (Collection) paramValue;
+                    return vLen.compareTo(coll.size()) < 0;
+                }
+
+                // array
+                if (paramValue.getClass().isArray()) {
+                    return vLen.compareTo(Array.getLength(paramValue)) < 0;
+                }
                 break;
-            case COLLECTION_SIZE_NOT_GREATER_THAN:
+            }
+            case COLLECTION_SIZE_NOT_GREATER_THAN: {
+                Integer vLen = Integer.valueOf(verifyValue);
+                // Collection
+                if (paramValue instanceof Collection) {
+                    Collection coll = (Collection) paramValue;
+                    return vLen.compareTo(coll.size()) >= 0;
+                }
+
+                // array
+                if (paramValue.getClass().isArray()) {
+                    return vLen.compareTo(Array.getLength(paramValue)) >= 0;
+                }
                 break;
-            case COLLECTION_SIZE_LESS_THAN:
+            }
+            case COLLECTION_SIZE_LESS_THAN: {
+                Integer vLen = Integer.valueOf(verifyValue);
+                // Collection
+                if (paramValue instanceof Collection) {
+                    Collection coll = (Collection) paramValue;
+                    return vLen.compareTo(coll.size()) > 0;
+                }
+
+                // array
+                if (paramValue.getClass().isArray()) {
+                    return vLen.compareTo(Array.getLength(paramValue)) > 0;
+                }
                 break;
-            case COLLECTION_SIZE_NOT_LESS_THAN:
+            }
+            case COLLECTION_SIZE_NOT_LESS_THAN: {
+                Integer vLen = Integer.valueOf(verifyValue);
+                // Collection
+                if (paramValue instanceof Collection) {
+                    Collection coll = (Collection) paramValue;
+                    return vLen.compareTo(coll.size()) <= 0;
+                }
+
+                // array
+                if (paramValue.getClass().isArray()) {
+                    return vLen.compareTo(Array.getLength(paramValue)) <= 0;
+                }
                 break;
-            case COLLECTION_SIZE_EQUAL:
+            }
+            case COLLECTION_SIZE_EQUAL: {
+                Integer vLen = Integer.valueOf(verifyValue);
+                // Collection
+                if (paramValue instanceof Collection) {
+                    Collection coll = (Collection) paramValue;
+                    return vLen.compareTo(coll.size()) == 0;
+                }
+
+                // array
+                if (paramValue.getClass().isArray()) {
+                    return vLen.compareTo(Array.getLength(paramValue)) == 0;
+                }
                 break;
+            }
         }
 
         return false;

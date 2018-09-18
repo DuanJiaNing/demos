@@ -14,14 +14,14 @@ public enum VerifyValueRule {
      */
 
     /**
-     * 无作为，不做校验
+     * equals() == true
      */
-    NON,
+    EQUAL,
 
     /**
      * ==
      */
-    VALUE_EQUAL,
+    OBJECT_EQUAL,
 
     /**
      * >

@@ -1,4 +1,4 @@
-package com.duan.springbootdemo.verify.annoation;
+package com.duan.springbootdemo.verify.annoation.method;
 
 import com.duan.springbootdemo.verify.VerifyValueRule;
 
@@ -19,12 +19,12 @@ public @interface RequestParamValueVerify {
     /**
      * 需要进行校验的参数名
      */
-    String param() default "";
+    String param();
 
     /**
      * 校验规则
      */
-    VerifyValueRule rule() default VerifyValueRule.NON;
+    VerifyValueRule rule() default VerifyValueRule.EQUAL;
 
     /**
      * 校验值
