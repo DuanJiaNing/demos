@@ -5,6 +5,9 @@ import com.duan.springbootcommondemo.entity.Person;
 import com.duan.springbootcommondemo.rest.ResultModel;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +47,27 @@ public class PersonService {
             throw new IllegalArgumentException();
         }
 
+    }
+
+    // 无论如何方法都会调用，添加 person 到缓存，key 为参数 id
+    @CachePut(value = "person", key = "#id")
+    public Person getPerson(Integer id) {
+        System.out.println("getPerson for cache test");
+        return personRepository.findOne(id);
+    }
+
+    // 删除缓存 person，key 为参数 id
+    @CacheEvict(value = "person", key = "#id")
+    public void removePerson(Integer id) {
+        System.out.println("removePerson for cache test");
+        personRepository.delete(id);
+    }
+
+    // 缓存中存在时直接返回，不调用方法，否则调用方法并放到缓存中
+    @Cacheable(value = "person", key = "#id")
+    public Person getPersonIfNeed(Integer id) {
+        System.out.println("getPersonIfNeed for cache test");
+        return personRepository.findOne(id);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.duan.springbootcommondemo;
 
 import com.duan.springbootcommondemo.dao.PersonRepository;
+import com.duan.springbootcommondemo.service.PersonService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,6 +17,9 @@ public class Test2 extends BaseTest {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private PersonService personService;
+
     @Test
     public void test() {
 //        out(personRepository.findAll());
@@ -23,6 +27,13 @@ public class Test2 extends BaseTest {
 //        out(personRepository.findFirst10ByIdGreaterThan(1));
         out(personRepository.findOne("Tom", 10));
 
+    }
+
+    @Test
+    public void test1() {
+//        outObj(personService.getPerson(3));
+//        outObj(personService.getPersonIfNeed(3));
+        outObj(personService.removePerson(3));
     }
 
     private <T> void out(List<T> list) {
