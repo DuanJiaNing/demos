@@ -10,6 +10,8 @@ app:
 
 # mysql
 spring:
+  thymeleaf:
+    cache: false
   jpa:
     hibernate:
       ddl-auto: update
