@@ -18,6 +18,30 @@ import java.util.Collection;
  * Created on 2018/9/17.
  * 使用自定义注解对 controller 的 HandlerMethod 进行参数验证
  *
+ * <p> 像下面这样覆盖 WebMvcRegistrationsAdapter#getRequestMappingHandlerAdapter 方法启用检验工具及相关注解:
+ *
+ * <pre class="code">
+ * {@code @Configuration}
+ * public class WebConfig extends WebMvcRegistrationsAdapter {
+ *
+ *     {@code @Override}
+ *     public RequestMappingHandlerAdapter getRequestMappingHandlerAdapter() {
+ *         return new RequestMappingHandlerAdapter() {
+ *             {@code @Override}
+ *             protected ServletInvocableHandlerMethod createInvocableHandlerMethod(HandlerMethod handlerMethod) {
+ *                 return new ServletInvocableHandlerMethodArgumentVerify(handlerMethod) {
+ *                     {@code @Override}
+ *                     protected Object warpResultFail(ServletInvocableHandlerMethodArgumentVerify.HandleResult result) {
+ *                         Object value = result.value;
+ *                         MethodParameter parameter = result.parameter;
+ *                         return super.warpResultFail(result);
+ *                     }
+ *                 };
+ *             }
+ *         };
+ *     }
+ * }</pre>
+ *
  * @author DuanJiaNing
  * @see WebConfig#getRequestMappingHandlerAdapter()
  */
@@ -43,7 +67,8 @@ public class ServletInvocableHandlerMethodArgumentVerify extends ServletInvocabl
         return super.doInvoke(args);
     }
 
-    private Result warpResultFail(HandleResult result) {
+
+    protected Object warpResultFail(HandleResult result) {
 
         String rule = "";
         if (result.rule instanceof VerifyRule) {
@@ -189,11 +214,11 @@ public class ServletInvocableHandlerMethodArgumentVerify extends ServletInvocabl
         return null;
     }
 
-    private static class HandleResult {
-        MethodParameter parameter;
-        Object value;
-        Object annotation;
-        Object rule;
+    protected static class HandleResult {
+        public MethodParameter parameter;
+        public Object value;
+        public Object annotation;
+        public Object rule;
 
         public HandleResult(MethodParameter parameter, Object value, Object annotation, Object rule) {
             this.parameter = parameter;

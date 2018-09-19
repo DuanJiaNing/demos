@@ -1,6 +1,44 @@
 server:
-  port: 9090
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
 
 app:
   auth: duan
   name: spring-boot-common-demo
+  enable: true
+
+# mysql
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8
+    username: root
+    password: 1234
+    type: com.alibaba.druid.pool.DruidDataSource
+  cache:
+    type: redis
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
+    pool:
+      maxTotal: 1024
+      maxIdle: 200
+      maxWait: 1000
+      testOnBorrow: true
+      testOnReturn: true
+    timeout: 0
+
+logging:
+  level:
+    org:
+      springframework:
+        security: info
+
+security:
+  enable-csrf: false # 无效，要在 WebSecurityConfigurerAdapter#configure(HttpSecurity http) 方法中设置

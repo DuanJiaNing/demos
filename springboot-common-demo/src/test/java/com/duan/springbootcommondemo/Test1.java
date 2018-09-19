@@ -1,9 +1,9 @@
 package com.duan.springbootcommondemo;
 
 import com.duan.springbootcommondemo.config.properties.AppInfoProperties;
-import com.duan.springbootcommondemo.entity.Person;
+import com.duan.springbootcommondemo.entity.User;
 import com.duan.springbootcommondemo.service.AppInfoService;
-import com.duan.springbootcommondemo.service.PersonService;
+import com.duan.springbootcommondemo.service.UserService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,7 +18,7 @@ public class Test1 extends BaseTest {
     private AppInfoProperties appInfoProperties;
 
     @Autowired
-    private PersonService personService;
+    private UserService userService;
 
     @Autowired
     private AppInfoService appInfoService; // 自动装配进行注册见 com.duan.springbootcommondemo.config.auto.AppInfoServiceAutoConfiguration
@@ -36,15 +36,15 @@ public class Test1 extends BaseTest {
 
     @Test
     public void test2() {
-        Person person = new Person();
-        person.setAge(112);
-        person.setAddress("beijing");
+        User user = new User();
+        user.setAge(112);
+        user.setAddress("beijing");
 
         // 没有设置 name，所有会回滚
-//        personService.insertPerson(person);
+//        personService.insertPerson(user);
 
         // 抛异常但不会回滚
-        personService.testPerson(person);
+        userService.testPerson(user);
 
     }
 

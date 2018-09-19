@@ -23,6 +23,24 @@
         </dependency>-->
 
         <dependency>
+            <groupId>com.duan.common</groupId>
+            <artifactId>common-base</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>lombok</artifactId>
+                    <groupId>org.projectlombok</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.duan.common</groupId>
+            <artifactId>common-spring</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
@@ -68,6 +86,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->

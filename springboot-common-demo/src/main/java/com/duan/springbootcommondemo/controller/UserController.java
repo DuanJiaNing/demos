@@ -1,28 +1,30 @@
 package com.duan.springbootcommondemo.controller;
 
 import com.duan.common.base.restful.ResultModel;
-import com.duan.springbootcommondemo.config.properties.AppInfoProperties;
-import com.duan.springbootcommondemo.service.AppService;
+import com.duan.springbootcommondemo.entity.User;
+import com.duan.springbootcommondemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created on 2018/9/10.
+ * Created on 2018/9/19.
  *
  * @author DuanJiaNing
  */
 @RestController
-@RequestMapping("/app")
-public class AppController {
+@RequestMapping("/user")
+public class UserController {
 
     @Autowired
-    private AppService appService;
+    private UserService userService;
 
-    @GetMapping("/info")
-    public ResultModel<AppInfoProperties> getAppInfo() {
-        return new ResultModel<>(appService.getAppInfoProperties());
+    @GetMapping
+    public ResultModel<Page<User>> userList() {
+        return new ResultModel<>(userService.findList(1, 10));
     }
+
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created on 2018/09/13.
@@ -15,17 +16,17 @@ import java.io.Serializable;
  */
 @Data
 @Entity
-@Table(name = "person")
-public class Person implements Serializable {
+@Table(name = "user_role")
+public class UserRole implements Serializable {
 
     @Id
     @GeneratedValue
     private Integer id;
 
-    private String name;
+    private Integer uId;
 
-    private Integer age;
+    private Integer rId;
 
-    private String address;
+    private Date createTime;
 
 }
