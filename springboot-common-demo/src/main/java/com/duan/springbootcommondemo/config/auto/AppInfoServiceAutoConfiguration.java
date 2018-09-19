@@ -1,5 +1,6 @@
-package com.duan.springbootcommondemo.config;
+package com.duan.springbootcommondemo.config.auto;
 
+import com.duan.springbootcommondemo.config.properties.AppInfoProperties;
 import com.duan.springbootcommondemo.service.AppInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

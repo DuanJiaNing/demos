@@ -1,4 +1,4 @@
-package com.duan.springbootcommondemo.config;
+package com.duan.springbootcommondemo.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

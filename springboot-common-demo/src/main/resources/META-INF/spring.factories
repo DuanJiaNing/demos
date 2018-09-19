@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.duan.springbootcommondemo.config.AppInfoServiceAutoConfiguration
+  com.duan.springbootcommondemo.config.auto.AppInfoServiceAutoConfiguration

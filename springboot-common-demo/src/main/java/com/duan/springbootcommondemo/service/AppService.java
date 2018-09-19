@@ -1,6 +1,6 @@
 package com.duan.springbootcommondemo.service;
 
-import com.duan.springbootcommondemo.config.AppInfoProperties;
+import com.duan.springbootcommondemo.config.properties.AppInfoProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

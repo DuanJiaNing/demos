@@ -1,6 +1,6 @@
 package com.duan.springbootcommondemo;
 
-import com.duan.springbootcommondemo.config.AppInfoProperties;
+import com.duan.springbootcommondemo.config.properties.AppInfoProperties;
 import com.duan.springbootcommondemo.entity.Person;
 import com.duan.springbootcommondemo.service.AppInfoService;
 import com.duan.springbootcommondemo.service.PersonService;
@@ -21,7 +21,7 @@ public class Test1 extends BaseTest {
     private PersonService personService;
 
     @Autowired
-    private AppInfoService appInfoService; // 自动装配进行注册见 com.duan.springbootcommondemo.config.AppInfoServiceAutoConfiguration
+    private AppInfoService appInfoService; // 自动装配进行注册见 com.duan.springbootcommondemo.config.auto.AppInfoServiceAutoConfiguration
 
     @Test
     public void test() {

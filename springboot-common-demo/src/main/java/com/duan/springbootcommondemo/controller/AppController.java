@@ -1,6 +1,6 @@
 package com.duan.springbootcommondemo.controller;
 
-import com.duan.springbootcommondemo.config.AppInfoProperties;
+import com.duan.springbootcommondemo.config.properties.AppInfoProperties;
 import com.duan.springbootcommondemo.rest.ResultModel;
 import com.duan.springbootcommondemo.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
