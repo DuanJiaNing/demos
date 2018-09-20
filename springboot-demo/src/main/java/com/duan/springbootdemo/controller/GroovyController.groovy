@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController
 class GroovyController {
 
     @Autowired
-    private OrgRepository orgRepository;
+    private OrgRepository orgRepository
 
     @GetMapping("/orgList")
     def orgList() {
