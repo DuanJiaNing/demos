@@ -1,18 +1,12 @@
-package com.duan.springbootdemo;
+package com.duan.springclouddemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * Created on 2018/4/24.
- *
- * @author 段佳宁
- */
 @SpringBootApplication
-public class SampleController {
+public class SpringcloundDemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SampleController.class, args);
+        SpringApplication.run(SpringcloundDemoApplication.class, args);
     }
-
 }
