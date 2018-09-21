@@ -1,0 +1,9 @@
+server:
+  port: 8761 # eureka 服务端口
+
+eureka:
+  instance:
+    hostname: locahost
+  client:
+    register-with-eureka: false # 当前服务不需要到 eureka 上注册
+    fetch-registry: false
