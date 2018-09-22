@@ -4,6 +4,7 @@ import com.duan.springclouddemo.person.domain.Person;
 import com.duan.springclouddemo.person.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class PersonController {
     @Autowired
     private PersonRepository personRepository;
 
-    @GetMapping("/save")
+    @PostMapping("/save")
     public List<Person> savePerson(String personName) {
         Person person = new Person();
         person.setName(personName);
