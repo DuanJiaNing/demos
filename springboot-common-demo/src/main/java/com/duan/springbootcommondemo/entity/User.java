@@ -1,5 +1,6 @@
 package com.duan.springbootcommondemo.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "user")
+@JsonRootName("userRoot")
+@JsonIgnoreProperties({"id", "time"})
 public class User implements Serializable {
 
     @Id
@@ -25,6 +28,7 @@ public class User implements Serializable {
 
     private String name;
 
+    @JsonIgnore
     private String password;
 
     private Integer age;
@@ -33,6 +37,8 @@ public class User implements Serializable {
 
     private Integer status;
 
+    @JsonProperty("time")
+    @JsonFormat(pattern = "yyyy-MM-DD")
     private Date createTime;
 
 }
