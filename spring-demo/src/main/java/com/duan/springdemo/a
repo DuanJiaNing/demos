@@ -1,0 +1,85 @@
+
+// 类加载
+CDPlayer: load class static{}
+
+// 装配 CDPlayer bean
+CDPlayer: step 1 {}
+CDPlayer: step constructer
+CDPlayer: step 2 setBeanName=CDPlayer
+CDPlayer: step 3 setBeanFactory=org.springframework.beans.factory.support.DefaultListableBeanFactory@464bee09: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,appConfig,aspectJInvoker,audience,encoreableIntroducer,invoker,trackCounter,aspectConfig,cake,cookies,dessertProvider,iceCream,sgtPeppers,envConfig,envOne,spELOne,main,MVCConfig,notepad,padConfig,shoppingConfig,shoppingService,CDPlayer,CDPlayerConfig,DVDPlayer,propertySourcesPlaceholderConfigurer,enumConverterFactory,platformSessionArgumentResolvers,myNotPad,scopedTarget.shoppingCart,shoppingCart,scopedTarget.shoppingCart2,shoppingCart2,setPeppers,cdPlayer,myDisc,nowDate,myDessert,org.springframework.aop.config.internalAutoProxyCreator,point,org.springframework.aop.aspectj.AspectJPointcutAdvisor#0,org.springframework.aop.aspectj.AspectJPointcutAdvisor#1,org.springframework.aop.aspectj.AspectJPointcutAdvisor#2,org.springframework.aop.aspectj.AspectJPointcutAdvisor#3,org.springframework.aop.aspectj.AspectJPointcutAdvisor#4,org.springframework.aop.aspectj.AspectJPointcutAdvisor#5,trackPlayer,org.springframework.aop.aspectj.DeclareParentsAdvisor#0,disc]; root of factory hierarchy
+CDPlayer: step 4 setApplicationContext=org.springframework.context.annotation.AnnotationConfigApplicationContext@48533e64: startup date [Tue Sep 25 10:24:42 CST 2018]; root of context hierarchy
+CDPlayer: step 5 init
+CDPlayer: step 6 afterPropertiesSet
+
+// 装配 cdPlayer bean
+CDPlayer: step 1 {}
+CDPlayer: step constructer
+CDPlayer: step 2 setBeanName=cdPlayer
+CDPlayer: step 3 setBeanFactory=org.springframework.beans.factory.support.DefaultListableBeanFactory@464bee09: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,org.springframework.context.event.internalEventListenerProcessor,org.springframework.context.event.internalEventListenerFactory,appConfig,aspectJInvoker,audience,encoreableIntroducer,invoker,trackCounter,aspectConfig,cake,cookies,dessertProvider,iceCream,sgtPeppers,envConfig,envOne,spELOne,main,MVCConfig,notepad,padConfig,shoppingConfig,shoppingService,CDPlayer,CDPlayerConfig,DVDPlayer,propertySourcesPlaceholderConfigurer,enumConverterFactory,platformSessionArgumentResolvers,myNotPad,scopedTarget.shoppingCart,shoppingCart,scopedTarget.shoppingCart2,shoppingCart2,setPeppers,cdPlayer,myDisc,nowDate,myDessert,org.springframework.aop.config.internalAutoProxyCreator,point,org.springframework.aop.aspectj.AspectJPointcutAdvisor#0,org.springframework.aop.aspectj.AspectJPointcutAdvisor#1,org.springframework.aop.aspectj.AspectJPointcutAdvisor#2,org.springframework.aop.aspectj.AspectJPointcutAdvisor#3,org.springframework.aop.aspectj.AspectJPointcutAdvisor#4,org.springframework.aop.aspectj.AspectJPointcutAdvisor#5,trackPlayer,org.springframework.aop.aspectj.DeclareParentsAdvisor#0,disc]; root of factory hierarchy
+CDPlayer: step 4 setApplicationContext=org.springframework.context.annotation.AnnotationConfigApplicationContext@48533e64: startup date [Tue Sep 25 10:24:42 CST 2018]; root of context hierarchy
+CDPlayer: step 5 init
+CDPlayer: step 6 afterPropertiesSet
+
+// 容器中其他的 bean 被装配
+CDPlayer: step 7 postProcessBeforeInitialization=org.springframework.context.event.internalEventListenerProcessor
+CDPlayer: step 8 postProcessAfterInitialization=org.springframework.context.event.internalEventListenerProcessor
+CDPlayer: step 7 postProcessBeforeInitialization=org.springframework.context.event.internalEventListenerFactory
+CDPlayer: step 8 postProcessAfterInitialization=org.springframework.context.event.internalEventListenerFactory
+CDPlayer: step 7 postProcessBeforeInitialization=appConfig
+CDPlayer: step 8 postProcessAfterInitialization=appConfig
+CDPlayer: step 7 postProcessBeforeInitialization=trackCounter
+CDPlayer: step 8 postProcessAfterInitialization=trackCounter
+CDPlayer: step 7 postProcessBeforeInitialization=disc
+CDPlayer: step 8 postProcessAfterInitialization=disc
+CDPlayer: step 7 postProcessBeforeInitialization=aspectJInvoker
+CDPlayer: step 8 postProcessAfterInitialization=aspectJInvoker
+CDPlayer: step 7 postProcessBeforeInitialization=audience
+CDPlayer: step 8 postProcessAfterInitialization=audience
+CDPlayer: step 7 postProcessBeforeInitialization=encoreableIntroducer
+CDPlayer: step 8 postProcessAfterInitialization=encoreableIntroducer
+
+
+CDPlayer: step 7 postProcessBeforeInitialization=invoker
+CDPlayer: step 8 postProcessAfterInitialization=invoker
+CDPlayer: step 7 postProcessBeforeInitialization=aspectConfig
+CDPlayer: step 8 postProcessAfterInitialization=aspectConfig
+CDPlayer: step 7 postProcessBeforeInitialization=cake
+CDPlayer: step 8 postProcessAfterInitialization=cake
+CDPlayer: step 7 postProcessBeforeInitialization=cookies
+CDPlayer: step 8 postProcessAfterInitialization=cookies
+CDPlayer: step 7 postProcessBeforeInitialization=iceCream
+CDPlayer: step 8 postProcessAfterInitialization=iceCream
+CDPlayer: step 7 postProcessBeforeInitialization=dessertProvider
+CDPlayer: step 8 postProcessAfterInitialization=dessertProvider
+CDPlayer: step 7 postProcessBeforeInitialization=envOne
+CDPlayer: step 8 postProcessAfterInitialization=envOne
+CDPlayer: step 7 postProcessBeforeInitialization=spELOne
+CDPlayer: step 8 postProcessAfterInitialization=spELOne
+CDPlayer: step 7 postProcessBeforeInitialization=main
+CDPlayer: step 8 postProcessAfterInitialization=main
+CDPlayer: step 7 postProcessBeforeInitialization=MVCConfig
+CDPlayer: step 8 postProcessAfterInitialization=MVCConfig
+CDPlayer: step 7 postProcessBeforeInitialization=notepad
+CDPlayer: step 8 postProcessAfterInitialization=notepad
+CDPlayer: step 7 postProcessBeforeInitialization=padConfig
+CDPlayer: step 8 postProcessAfterInitialization=padConfig
+CDPlayer: step 7 postProcessBeforeInitialization=shoppingConfig
+CDPlayer: step 8 postProcessAfterInitialization=shoppingConfig
+CDPlayer: step 7 postProcessBeforeInitialization=shoppingCart
+CDPlayer: step 8 postProcessAfterInitialization=shoppingCart
+CDPlayer: step 8 postProcessAfterInitialization=shoppingCart
+CDPlayer: step 7 postProcessBeforeInitialization=shoppingCart2
+CDPlayer: step 8 postProcessAfterInitialization=shoppingCart2
+CDPlayer: step 8 postProcessAfterInitialization=shoppingCart2
+CDPlayer: step 7 postProcessBeforeInitialization=shoppingService
+CDPlayer: step 8 postProcessAfterInitialization=shoppingService
+CDPlayer: step 7 postProcessBeforeInitialization=enumConverterFactory
+CDPlayer: step 8 postProcessAfterInitialization=enumConverterFactory
+CDPlayer: step 7 postProcessBeforeInitialization=platformSessionArgumentResolvers
+CDPlayer: step 8 postProcessAfterInitialization=platformSessionArgumentResolvers
+CDPlayer: step 7 postProcessBeforeInitialization=myDisc
+CDPlayer: step 8 postProcessAfterInitialization=myDisc
+CDPlayer: step 7 postProcessBeforeInitialization=nowDate
+CDPlayer: step 8 postProcessAfterInitialization=nowDate
+CDPlayer: step 7 postProcessBeforeInitialization=myDessert
+CDPlayer: step 8 postProcessAfterInitialization=myDessert

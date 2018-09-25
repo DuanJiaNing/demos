@@ -1,6 +1,5 @@
 package com.duan.springdemo.conditional;
 
-import com.duan.springdemo.player.CDPlayer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -27,8 +26,8 @@ public class MyConditional implements Condition {
         log.warn(registry.getBeanDefinitionCount() + "");
 
         ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
-        CDPlayer cdPlayer = (CDPlayer) beanFactory.getBean("CDPlayer");
-        log.warn(cdPlayer.toString());
+//        CDPlayer cdPlayer = (CDPlayer) beanFactory.getBean("CDPlayer");
+//        log.warn(cdPlayer.toString());
 
         ClassLoader classLoader = context.getClassLoader();
         log.warn(classLoader.getParent().toString());

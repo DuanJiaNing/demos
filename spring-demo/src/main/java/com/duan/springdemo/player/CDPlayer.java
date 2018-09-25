@@ -1,7 +1,6 @@
 package com.duan.springdemo.player;
 
 import com.duan.springdemo.disc.CompactDisc;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -27,7 +26,6 @@ import javax.annotation.Resource;
  * @author DuanJiaNing
  */
 @Component
-@Slf4j
 public class CDPlayer implements
         MediaPlayer,
         BeanNameAware,
@@ -41,18 +39,22 @@ public class CDPlayer implements
     private CompactDisc disc;
 
     static {
-        log.info("load class static{}");
+        System.out.println("CDPlayer: load class static{}");
     }
 
     {
         // 1
-        log.info("step 1 {}");
+        System.out.println("CDPlayer: step 1 {}");
+    }
+
+    public CDPlayer() {
+        System.out.println("CDPlayer: step constructer");
     }
 
     @PostConstruct
     public void init() {
         // 5
-        log.info("step 5 init ");
+        System.out.println("CDPlayer: step 5 init ");
     }
 
     @Override
@@ -63,44 +65,44 @@ public class CDPlayer implements
     @Override
     public void setBeanName(String name) {
         // 2
-        log.info("step 2 setBeanName=" + name);
+        System.out.println("CDPlayer: step 2 setBeanName=" + name);
     }
 
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         // 3
-        log.info("step 3 setBeanFactory=" + beanFactory.toString());
+        System.out.println("CDPlayer: step 3 setBeanFactory=" + beanFactory.toString());
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
         // 6
-        log.info("step 6 afterPropertiesSet");
+        System.out.println("CDPlayer: step 6 afterPropertiesSet");
     }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         // 4
-        log.info("step 4 setApplicationContext=" + applicationContext.toString());
+        System.out.println("CDPlayer: step 4 setApplicationContext=" + applicationContext.toString());
     }
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         // 7
-        log.info("step 7 postProcessBeforeInitialization=" + beanName);
+        System.out.println("CDPlayer: step 7 postProcessBeforeInitialization=" + beanName);
         return null;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         // 8
-        log.info("step 8 postProcessAfterInitialization=" + beanName);
+        System.out.println("CDPlayer: step 8 postProcessAfterInitialization=" + beanName);
         return null;
     }
 
     @Override
     public void destroy() throws Exception {
         // 9
-        log.info("step 9 destroy");
+        System.out.println("CDPlayer: step 9 destroy");
     }
 }
