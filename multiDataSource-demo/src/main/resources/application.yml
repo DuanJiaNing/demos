@@ -1,0 +1,35 @@
+#基础配置
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.2.3:3306/db?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: wall
+    maxActive: 100
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 10
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    multi:
+      ds-keys: db1,db2
+      db1:
+        url: jdbc:mysql://192.168.2.3:3306/db11?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        username: root
+        password: 1234
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.alibaba.druid.pool.DruidDataSource
+      db2:
+        url: jdbc:mysql://192.168.2.3:3306/db12?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+        username: root
+        password: 1234
+        driver-class-name: com.mysql.jdbc.Driver
+        type: com.alibaba.druid.pool.DruidDataSource
