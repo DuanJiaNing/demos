@@ -3,8 +3,12 @@ spring:
     name: ui
 
 eureka:
+  server:
+    host: localhost
+    port: 8761
   instance:
     non-secure-port: ${server.port:80}
+    hostname: 127.0.0.1
   client:
     service-url:
-      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
+      defaultZone: http://${eureka.server.host}:${eureka.server.port}/eureka/
