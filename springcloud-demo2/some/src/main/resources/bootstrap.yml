@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: some
+  cloud:
+    config:
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: CONFIG # 通过 eureka server 发现 config server
+
+eureka:
+  server:
+    host: localhost
+    port: 8761
+  instance:
+    non-secure-port: ${server.port:8083}
+    hostname: 127.0.0.1
+  client:
+    service-url:
+      defaultZone: http://${eureka.server.host}:${eureka.server.port}/eureka/
