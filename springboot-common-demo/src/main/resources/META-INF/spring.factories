@@ -1,2 +1,8 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.duan.springbootcommondemo.config.auto.AppInfoServiceAutoConfiguration
+
+org.springframework.boot.SpringApplicationRunListener=\
+  com.duan.springbootcommondemo.config.listener.ApplicationRunListener
+
+org.springframework.context.ApplicationContextInitializer=\
+  com.duan.springbootcommondemo.config.initializer.AppContextInitializer

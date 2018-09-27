@@ -1,25 +1,20 @@
 
 
-DDDDDDDDDDDDD                                                                   JJJJJJJJJJJiiii                  NNNNNNNN        NNNNNNNN iiii
-D::::::::::::DDD                                                                J:::::::::i::::i                 N:::::::N       N::::::Ni::::i
-D:::::::::::::::DD                                                              J:::::::::Jiiii                  N::::::::N      N::::::N iiii
-DDD:::::DDDDD:::::D                                                             JJ:::::::JJ                      N:::::::::N     N::::::N
-  D:::::D    D:::::Duuuuuu    uuuuuu   aaaaaaaaaaaaa nnnn  nnnnnnnn               J:::::Jiiiiiii  aaaaaaaaaaaaa  N::::::::::N    N::::::iiiiiinnnn  nnnnnnnn      ggggggggg   ggggg
-  D:::::D     D:::::u::::u    u::::u   a::::::::::::an:::nn::::::::nn             J:::::Ji:::::i  a::::::::::::a N:::::::::::N   N::::::i:::::n:::nn::::::::nn   g:::::::::ggg::::g
-  D:::::D     D:::::u::::u    u::::u   aaaaaaaaa:::::n::::::::::::::nn            J:::::J i::::i  aaaaaaaaa:::::aN:::::::N::::N  N::::::Ni::::n::::::::::::::nn g:::::::::::::::::g
-  D:::::D     D:::::u::::u    u::::u            a::::nn:::::::::::::::n           J:::::j i::::i           a::::aN::::::N N::::N N::::::Ni::::nn:::::::::::::::g::::::ggggg::::::gg
-  D:::::D     D:::::u::::u    u::::u     aaaaaaa:::::a n:::::nnnn:::::n           J:::::J i::::i    aaaaaaa:::::aN::::::N  N::::N:::::::Ni::::i n:::::nnnn:::::g:::::g     g:::::g
-  D:::::D     D:::::u::::u    u::::u   aa::::::::::::a n::::n    n::::JJJJJJJ     J:::::J i::::i  aa::::::::::::aN::::::N   N:::::::::::Ni::::i n::::n    n::::g:::::g     g:::::g
-  D:::::D     D:::::u::::u    u::::u  a::::aaaa::::::a n::::n    n::::J:::::J     J:::::J i::::i a::::aaaa::::::aN::::::N    N::::::::::Ni::::i n::::n    n::::g:::::g     g:::::g
-  D:::::D    D:::::Du:::::uuuu:::::u a::::a    a:::::a n::::n    n::::J::::::J   J::::::J i::::ia::::a    a:::::aN::::::N     N:::::::::Ni::::i n::::n    n::::g::::::g    g:::::g
-DDD:::::DDDDD:::::D u:::::::::::::::ua::::a    a:::::a n::::n    n::::J:::::::JJJ:::::::Ji::::::a::::a    a:::::aN::::::N      N::::::::i::::::in::::n    n::::g:::::::ggggg:::::g
-D:::::::::::::::DD   u:::::::::::::::a:::::aaaa::::::a n::::n    n::::nJJ:::::::::::::JJ i::::::a:::::aaaa::::::aN::::::N       N:::::::i::::::in::::n    n::::ng::::::::::::::::g
-D::::::::::::DDD      uu::::::::uu:::ua::::::::::aa:::an::::n    n::::n  JJ:::::::::JJ   i::::::ia::::::::::aa:::N::::::N        N::::::i::::::in::::n    n::::n gg::::::::::::::g
-DDDDDDDDDDDDD           uuuuuuuu  uuuu aaaaaaaaaa  aaaannnnnn    nnnnnn    JJJJJJJJJ     iiiiiiii aaaaaaaaaa  aaaNNNNNNNN         NNNNNNiiiiiiiinnnnnn    nnnnnn   gggggggg::::::g
-                                                                                                                                                                           g:::::g
-                                                                                                                                                               gggggg      g:::::g
-                                                                                                                                                               g:::::gg   gg:::::g
-                                                                                                                                                                g::::::ggg:::::::g
-                                                                                                                                                                 gg:::::::::::::g
-                                                                                                                                                                   ggg::::::ggg
-                                                                                                                                                                      gggggg
+
+
+
+
+ djn djn djn djn djn djn djn djn djn      djn djn djn djn djn djn djn djn djn
+
+         djn djn djn djn djn djn             djn djn djn djn djn djn
+             djn djn djn                              djn djn djn
+             djn djn djn                              djn djn djn
+         djn djn djn djn djn djn             djn djn djn djn djn djn
+
+
+                             djn djn djn djn djn
+                             djn djn djn djn djn
+
+
+
+
