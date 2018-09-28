@@ -11,7 +11,7 @@ import com.intellij.database.util.DasUtil
  *   FILES       files helper
  */
 
-packageName = "com.sample;" // 包名需手动填写
+packageName = "***;" // 需手动配置
 typeMapping = [
         (~/(?i)int/)                      : "Integer",
         (~/(?i)float|double|decimal|real/): "Double",
@@ -34,20 +34,23 @@ FILES.chooseDirectoryAndSave("Choose directory", "Choose where to store generate
 }
 
 def generate(table, dir) {
-    def className = javaName(table.getName(), true) + 'TO'
+    def className = javaName(table.getName(), true)
     def fields = calcFields(table)
-    new File(dir, className + ".java").withPrintWriter { out -> generate(out, className, fields) }
+
+    // 实体类后缀需要手动设置，这里为 Entity
+    new File(dir, className + "Entity.java").withPrintWriter { out -> generate(out, className + "Entity", fields) }
 }
 
 def generate(out, className, fields) {
     def date = new Date().format("yyyy/MM/dd")
     out.println "package $packageName"
     out.println "import java.io.Serializable;"
+    out.println "import java.util.Date;"
     out.println ""
     out.println "/**"
     out.println " * Created on $date."
     out.println " *"
-    out.println " * @author DuanJiaNing"
+    out.println " * @author XX" // 可自定义
     out.println " */"
     out.println "public class $className implements Serializable {"
     out.println ""

@@ -13,53 +13,74 @@ import com.intellij.database.util.DasUtil
 
 // entity(dto)、mapper(dao) 与数据库表的对应关系在这里手动指明,idea Database 窗口里只能选下列配置了的 mapper
 // tableName(key) : [mapper(dao),entity(dto)]
-mapper = [
-        'bj_room'          : ['cn.com.artemis.bj.dao.connect.BjRoomMapper', 'cn.com.artemis.bj.to.connect.BjRoomTO'],
-        'bj_user'          : ['cn.com.artemis.bj.dao.connect.BjUserMapper', 'cn.com.artemis.bj.to.connect.BjUserTO'],
-        'bj_user_login_log': ['cn.com.artemis.bj.dao.connect.BjUserLoginLogMapper', 'cn.com.artemis.bj.to.connect.BjUserLoginLogTO'],
-        'bj_user_setting'  : ['cn.com.artemis.bj.dao.connect.BjUserSettingMapper', 'cn.com.artemis.bj.to.connect.BjUserSettingTO'],
-        'sys_param'        : ['cn.com.artemis.bj.dao.connect.SysParamMapper', 'cn.com.artemis.bj.to.connect.SysParamTO'],
+typeMapping = [
+        (~/(?i)int/)                      : "INTEGER",
+        (~/(?i)float|double|decimal|real/): "DOUBLE",
+        (~/(?i)datetime|timestamp/)       : "TIMESTAMP",
+        (~/(?i)date/)                     : "TIMESTAMP",
+        (~/(?i)time/)                     : "TIMESTAMP",
+        (~/(?i)/)                         : "VARCHAR"
 ]
 
+basePackage = "**" // 包名需手动填写
 
 FILES.chooseDirectoryAndSave("Choose directory", "Choose where to store generated files") { dir ->
     SELECTION.filter { it instanceof DasTable }.each { generate(it, dir) }
 }
 
 def generate(table, dir) {
-    def mapperName = mapperName(table.getName(), true) + 'Mapper'
+    def baseName = mapperName(table.getName(), true)
     def fields = calcFields(table)
-    new File(dir, mapperName + ".xml").withPrintWriter { out -> generate(table, out, mapperName, fields) }
+    new File(dir, baseName + "Mapper.xml").withPrintWriter { out -> generate(table, out, baseName, fields) }
 }
 
-def generate(table, out, mapperName, fields) {
+def generate(table, out, baseName, fields) {
     def baseResultMap = 'BaseResultMap'
     def base_Column_List = 'Base_Column_List'
     def date = new Date().format("yyyy/MM/dd")
     def tableName = table.getName()
-    def info = mapper.get(tableName)
 
-    out.println mappingsStart(info[0])
+    def dao = basePackage + ".dao.${baseName}Mapper"
+    def to = basePackage + ".to.${baseName}TO"
+
+    out.println mappingsStart(dao)
+    out.println resultMap(baseResultMap, to, fields)
     out.println sql(fields, base_Column_List)
     out.println selectById(tableName, fields, baseResultMap, base_Column_List)
     out.println deleteById(tableName, fields)
-    out.println delete(tableName, fields, info[1])
-    out.println insert(tableName, fields, info[1])
-    out.println update(tableName, fields, info[1])
-    out.println selectList(tableName, fields, info[1], base_Column_List)
+    out.println delete(tableName, fields, to)
+    out.println insert(tableName, fields, to)
+    out.println update(tableName, fields, to)
+    out.println selectList(tableName, fields, to, base_Column_List, baseResultMap)
     out.println mappingsEnd()
 
+}
+
+static def resultMap(baseResultMap, to, fields) {
+
+    def inner = ''
+    fields.each() {
+        inner += '\t\t<result column="' + it.sqlFieldName + '" jdbcType="' + it.type + '" property="' + it.name + '"/>\n'
+    }
+
+    return '''\t<resultMap id="''' + baseResultMap + '''" type="''' + to + '''">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+''' + inner + '''\t</resultMap>
+'''
 }
 
 def calcFields(table) {
     DasUtil.getColumns(table).reduce([]) { fields, col ->
         def spec = Case.LOWER.apply(col.getDataType().getSpecification())
+        def typeStr = typeMapping.find { p, t -> p.matcher(spec).find() }.value
         fields += [[
                            comment     : col.getComment(),
                            name        : mapperName(col.getName(), false),
                            sqlFieldName: col.getName(),
+                           type        : typeStr,
                            annos       : ""]]
     }
+
 }
 
 def mapperName(str, capitalize) {
@@ -104,7 +125,7 @@ static def insert(tableName, fields, parameterType) {
             ''' + testNotNullStr(fields) + '''
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            ''' + testNotNullStrWhere(fields) + '''
+            ''' + testNotNullStrSet(fields) + '''
         </trim>
     </insert>
 '''
@@ -114,7 +135,7 @@ static def insert(tableName, fields, parameterType) {
 static def update(tableName, fields, parameterType) {
 
     return '''
-    <update id="update" parameterType="''' + parameterType + ''''">
+    <update id="update" parameterType="''' + parameterType + '''">
         update ''' + tableName + '''
         <set>
             ''' + testNotNullStrWhere(fields) + '''
@@ -146,10 +167,10 @@ static def delete(tableName, fields, parameterType) {
 }
 
 // ------------------------------------------------------------------------ selectList
-static def selectList(tableName, fields, parameterType, base_Column_List) {
+static def selectList(tableName, fields, parameterType, base_Column_List, baseResultMap) {
 
     return '''
-    <select id="selectList" parameterType="''' + parameterType + '''">
+    <select id="selectList" parameterType="''' + parameterType + '''" resultMap="''' + baseResultMap + '''">
         select
         <include refid="''' + base_Column_List + '''"/>
                 from ''' + tableName + '''
@@ -180,6 +201,18 @@ static def testNotNullStrWhere(fields) {
         inner += '''
         <if test="''' + it.name + ''' != null">
             and ''' + it.sqlFieldName + ''' = #{''' + it.name + '''}
+        </if>\n'''
+    }
+
+    return inner
+}
+
+static def testNotNullStrSet(fields) {
+    def inner = ''
+    fields.each {
+        inner += '''
+        <if test="''' + it.name + ''' != null">
+            #{''' + it.name + '''},
         </if>\n'''
     }
 
