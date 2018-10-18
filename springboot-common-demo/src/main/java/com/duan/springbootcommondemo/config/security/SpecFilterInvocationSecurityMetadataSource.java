@@ -34,6 +34,11 @@ public class SpecFilterInvocationSecurityMetadataSource implements FilterInvocat
                 Integer roleCode = 1; // urr.getRoleId();
                 List<ConfigAttribute> cs = new ArrayList<>(); // 根据 url 或 role 查询对应的 funcs
                 return cs;
+
+             /*   //当权限表权限的method为ALL时表示拥有此路径的所有请求方式权利。
+                if (method.equals(request.getMethod()) || "ALL".equals(method)) {
+                    return;
+                }*/
             }
 
         }
