@@ -11,11 +11,11 @@ import java.util.Collection;
  *
  * @author DuanJiaNing
  */
-public class UserDetailsImpl implements UserDetails {
+public class SpecDetailsImpl implements UserDetails {
 
     private final User user;
 
-    public UserDetailsImpl(User user) {
+    public SpecDetailsImpl(User user) {
         this.user = user;
     }
 

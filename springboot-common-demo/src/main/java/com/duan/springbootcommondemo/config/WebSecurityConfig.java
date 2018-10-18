@@ -1,5 +1,6 @@
 package com.duan.springbootcommondemo.config;
 
+import com.duan.springbootcommondemo.config.security.SpecSecurityInterceptor;
 import com.duan.springbootcommondemo.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
 /**
  * Created on 2018/9/19.
@@ -20,6 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private SpecSecurityInterceptor specSecurityInterceptor;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -73,5 +78,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 关闭 csrf
                 .and()
                 .csrf().disable();
+
+        // https://blog.csdn.net/u012373815/article/details/54633046
+        http.addFilterBefore(specSecurityInterceptor, FilterSecurityInterceptor.class);
+
     }
 }

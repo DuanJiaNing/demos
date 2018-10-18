@@ -24,7 +24,7 @@ import java.util.List;
  * @author DuanJiaNing
  */
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+public class SpecDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -45,6 +45,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         userRoles.forEach(role -> {
             Role ro = roleRepository.findOne(role.getRId());
+
+            // FIXME 此处为具体的功能（权限），而不是角色
             authorities.add(new SimpleGrantedAuthority(ro.getCode()));
         });
 
@@ -52,6 +54,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 User(user.getName(), user.getPassword(), user.getStatus().equals(UserStatusEnum.ENABLE.getCode()),
                 true, true, true, authorities);
 
-        return new UserDetailsImpl(secUser);
+        return new SpecDetailsImpl(secUser);
     }
 }
