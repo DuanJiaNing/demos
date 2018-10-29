@@ -11,9 +11,9 @@ class Main {
 
         println "Hello world"
 
-        def main = new Main()
+//        def main = new Main()
 //        main.printFile()
-        main.writeToFile("hello aa", 0..100)
+//        main.writeToFile("hello aa", 0..100)
 
     }
 
