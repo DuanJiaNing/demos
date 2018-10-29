@@ -5,6 +5,8 @@
  */
 class FilePatchRename {
 
+    static int count = 1
+
     static void main(String[] args) {
         print 'input dir path: '
         def scanner = new BufferedReader(new InputStreamReader(System.in))
@@ -13,15 +15,14 @@ class FilePatchRename {
         def targetPath = scanner.readLine()
         scanner.close()
 
-        def newDir = new File(targetPath)
-        if (!newDir.exists()) newDir.mkdirs()
+        def process = { file -> // md 文件
 
-        def regex = '(POST)|(GET)|(DELETE)|(PUT)'
-        new File(dirPath).eachFile { file ->
+            file = (File) file
 
             // 重命名
+            def regex = '(POST)|(GET)|(DELETE)|(PUT)'
             def desName = file.name.replaceAll(regex, '')
-            println file.name + ' -> ' + desName
+            println count + '\t' + file.name + ' -> ' + desName
 
             // md 标题规范 ##aa -> ## aa
             def targetFile = new File(targetPath + File.separator + desName)
@@ -37,9 +38,26 @@ class FilePatchRename {
 
             writer.flush()
             writer.close()
+            count++
         }
 
+        def newDir = new File(targetPath)
+        if (!newDir.exists()) newDir.mkdirs()
+        loop(new File(dirPath), process)
+
         println 'process finished'
+    }
+
+    static void loop(File file, def process) {
+        file.eachFile { f ->
+            if (f.isDirectory()) {
+                loop(f, process)
+            }
+
+            if (f.isFile()) {
+                process(f)
+            }
+        }
     }
 
 }
