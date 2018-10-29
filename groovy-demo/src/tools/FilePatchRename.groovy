@@ -1,3 +1,4 @@
+package tools
 /**
  * Created on 2018/10/29.
  *  批量重命名
@@ -43,21 +44,9 @@ class FilePatchRename {
 
         def newDir = new File(targetPath)
         if (!newDir.exists()) newDir.mkdirs()
-        loop(new File(dirPath), process)
+        Util.scanDir(new File(dirPath), process)
 
         println 'process finished'
-    }
-
-    static void loop(File file, def process) {
-        file.eachFile { f ->
-            if (f.isDirectory()) {
-                loop(f, process)
-            }
-
-            if (f.isFile()) {
-                process(f)
-            }
-        }
     }
 
 }

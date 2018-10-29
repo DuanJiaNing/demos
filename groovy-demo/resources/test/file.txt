@@ -1,0 +1,23 @@
+
+**mock api**：http://result.eolinker.com/lD5yawSa25299adaa05a1422c4a9075b129cf1c772740e7?uri=/dict
+```
+{
+    "code":200,
+    "data": {
+        "dictName": "国家",
+        "items": [
+            {
+                "dictCode": "UK" ,
+                "dictItemValue": "英国",
+                "dictItemName": "英国"
+            },
+            {
+                "dictCode": "CN" ,
+                "dictItemValue": "中国",
+                "dictItemName": "中华人民共和国"
+            }
+        ]
+        
+    }
+}
+```
