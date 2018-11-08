@@ -14,10 +14,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/test")
 public class TestController {
 
-    @GetMapping("/deviceType")
-    @OperatorLog("modelCode is {model.code} ,result is {$},arg num={num}")
+    @GetMapping("/t1")
+    @OperatorLog("入参 modelCode 的值是 {model.code} ,结果是 {$},参数 num={num}")
     public String testDeviceType(@RequestBody ResultModel model, @RequestParam String num) {
         return DeviceUtils.getDeviceType();
+    }
+
+    @GetMapping("/t2")
+    @OperatorLog("测试方法2")
+    public String testDeviceType1() {
+        return "";
+    }
+
+    @GetMapping("/t3")
+    @OperatorLog("#{(#$.code == 200 ? '成功' : '失败')+': 测试方法 3 ，参数值为' + #num}")
+    public ResultModel testDeviceType2(@RequestParam String num) {
+        ResultModel model = new ResultModel();
+        model.setCode(200);
+        return model;
     }
 
 
