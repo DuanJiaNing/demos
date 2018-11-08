@@ -16,5 +16,6 @@ public @interface DataSource {
     /**
      * 数据源 dsKey
      */
-    String value() default DynamicDataSourceRegister.defaultDataSourceKey;
+    DsKey dsKey() default DsKey.DATASOURCE;
+
 }

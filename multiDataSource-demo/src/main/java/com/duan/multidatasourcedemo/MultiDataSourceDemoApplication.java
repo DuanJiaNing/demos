@@ -1,6 +1,6 @@
 package com.duan.multidatasourcedemo;
 
-import com.duan.multidatasourcedemo.config.datasource.DynamicDataSourceRegister;
+import com.duan.multidatasourcedemo.config.datasource.DynamicDataSourceBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import;
  * @author DuanJiaNing
  */
 @SpringBootApplication
-@Import({DynamicDataSourceRegister.class})
+@Import({DynamicDataSourceBuilder.class})
 public class MultiDataSourceDemoApplication {
 
     public static void main(String[] args) {
