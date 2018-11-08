@@ -1,9 +1,9 @@
 package com.duan.springbootdemo1.controller;
 
+import com.duan.springbootdemo1.config.annotation.OperatorLog;
+import com.duan.springbootdemo1.restful.ResultModel;
 import com.duan.springbootdemo1.util.DeviceUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created on 2018/11/1.
@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @GetMapping("/deviceType")
-    public String testDeviceType() {
+    @OperatorLog("modelCode is {model.code} ,result is {$},arg num={num}")
+    public String testDeviceType(@RequestBody ResultModel model, @RequestParam String num) {
         return DeviceUtils.getDeviceType();
     }
 
