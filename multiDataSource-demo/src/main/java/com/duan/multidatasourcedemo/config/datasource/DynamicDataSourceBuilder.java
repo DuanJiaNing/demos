@@ -15,7 +15,6 @@ import java.util.Map;
 
 /**
  * Created on 2018/9/6.
- * 将默认数据源和定制数据源添加到 IOC 容器
  *
  * @author DuanJiaNing
  * @see com.duan.multidatasourcedemo.config.datasource.DataSource
@@ -34,9 +33,19 @@ public class DynamicDataSourceBuilder implements EnvironmentAware {
     // 定制数据源 key 定义，即 dskey 部分，多个数据源用 "," 号隔开
     private static final String customDataSourceKeys = customDataSourcePrefix + ".ds-keys";
 
-    // 默认数据源
-    private DataSource defaultDataSource;
-    private Map<String, DataSource> targetDataSources = new HashMap<>();
+    private DataSource defaultDataSource; // 默认数据源
+    private Map<String, DataSource> targetDataSources = new HashMap<>(); // 动态数据源
+
+    /**
+     * 加载主默认源配置.
+     */
+    private void initDefaultDataSource(Environment env) {
+        defaultDataSource = buildDataSource(env, defaultDataSourcePrefix);
+        dataBinder(defaultDataSource, env);
+
+        // 将主数据源添加到数据源库中
+        targetDataSources.put(defaultDataSourceKey, defaultDataSource);
+    }
 
     /**
      * 加载多数据源配置
@@ -45,18 +54,15 @@ public class DynamicDataSourceBuilder implements EnvironmentAware {
     public void setEnvironment(Environment environment) {
         initDefaultDataSource(environment);
         initCustomDataSources(environment);
-
-        DynamicDataSource.addDsKey(defaultDataSourceKey);
-        targetDataSources.keySet().forEach(DynamicDataSource::addDsKey); // 添加定制数据源
-
     }
 
-    /**
-     * 加载主默认源配置.
-     */
-    private void initDefaultDataSource(Environment env) {
-        defaultDataSource = buildDataSource(env, defaultDataSourcePrefix);
-        dataBinder(defaultDataSource, env);
+    private class DataSourcePropertyKey {
+        // properties 对应 key 名
+        static final String url = "url";
+        static final String username = "username";
+        static final String password = "password";
+        static final String driverClassName = "driver-class-name";
+        static final String type = "type";
     }
 
     /**
@@ -72,9 +78,6 @@ public class DynamicDataSourceBuilder implements EnvironmentAware {
             targetDataSources.put(dsKey, ds);
             dataBinder(ds, env);
         }
-
-        // 将主数据源添加到数据源库中
-        targetDataSources.put(defaultDataSourceKey, defaultDataSource);
 
     }
 
@@ -156,12 +159,4 @@ public class DynamicDataSourceBuilder implements EnvironmentAware {
         return targetDataSources;
     }
 
-    private class DataSourcePropertyKey {
-        // properties 对应 key 名
-        static final String url = "url";
-        static final String username = "username";
-        static final String password = "password";
-        static final String driverClassName = "driver-class-name";
-        static final String type = "type";
-    }
 }

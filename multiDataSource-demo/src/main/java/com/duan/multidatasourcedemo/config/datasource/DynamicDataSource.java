@@ -28,13 +28,12 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     @Autowired
     private DynamicDataSourceBuilder dynamicDataSourceBuilder;
 
-    // 维护数据源 key（name）
+    // 维护数据源 key（Lookup key）
     private static Set<String> dsKeySet = new HashSet<>();
 
     public static DsKey getDataSourceKey() {
         return dataSourceKey.get();
     }
-
     public static void setDataSourceKey(DsKey key) {
         dataSourceKey.set(key);
     }
@@ -43,15 +42,12 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         dsKeySet.add(key);
         return dsKeySet.size();
     }
-
     public static void clearDataSourceType() {
         dataSourceKey.remove();
     }
-
     public static boolean contains(String key) {
         return dsKeySet.contains(key);
     }
-
     public static boolean contains(DsKey key) {
         return dsKeySet.contains(key.getCode());
     }
@@ -63,9 +59,15 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     @Override
     public void afterPropertiesSet() {
-        Map<String, DataSource> customDataSources = dynamicDataSourceBuilder.getTargetDataSources();
-        DataSource defaultDataSource = dynamicDataSourceBuilder.getDefaultDataSource();
 
+        // 所有数据源，包括默认数据源
+        Map<String, DataSource> customDataSources = dynamicDataSourceBuilder.getTargetDataSources();
+
+        // Lookup key
+        customDataSources.forEach((key, da) -> addDsKey(key));
+
+        // DataSource
+        DataSource defaultDataSource = dynamicDataSourceBuilder.getDefaultDataSource();
         setDefaultTargetDataSource(defaultDataSource);
         setTargetDataSources(new HashMap<>(customDataSources));
 

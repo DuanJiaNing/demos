@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Inherited // 使类上的注解可以被继承
+@Inherited
 public @interface DataSource {
 
     /**
