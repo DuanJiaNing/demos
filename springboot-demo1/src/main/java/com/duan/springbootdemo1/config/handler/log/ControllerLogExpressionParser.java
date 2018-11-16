@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  *
  * @author DuanJiaNing
  */
-public class OperatorLogExpressionParser implements LogExpressionParser {
+public class ControllerLogExpressionParser implements LogExpressionParser {
 
     private final Map<String, Object> paramNameValueMap;
     private final Object returnValue;
@@ -58,7 +58,7 @@ public class OperatorLogExpressionParser implements LogExpressionParser {
         }
     };
 
-    public OperatorLogExpressionParser(Map<String, Object> paramNameValueMap, Object returnValue, HandlerMethod method) {
+    public ControllerLogExpressionParser(Map<String, Object> paramNameValueMap, Object returnValue, HandlerMethod method) {
         this.paramNameValueMap = paramNameValueMap;
         this.returnValue = returnValue;
         this.method = method;

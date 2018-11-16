@@ -2,7 +2,7 @@ package com.duan.springbootdemo1.config.handler;
 
 import com.duan.springbootdemo1.config.annotation.OperatorLog;
 import com.duan.springbootdemo1.config.handler.log.LogExpressionParser;
-import com.duan.springbootdemo1.config.handler.log.OperatorLogExpressionParser;
+import com.duan.springbootdemo1.config.handler.log.ControllerLogExpressionParser;
 import com.duan.springbootdemo1.config.web.method.HandlerMethodPostProcessor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
@@ -22,7 +22,7 @@ import java.util.Map;
  * @author DuanJiaNing
  */
 @Component
-public class OperatorLogHandler implements HandlerMethodPostProcessor {
+public class LogHandler implements HandlerMethodPostProcessor {
 
     @Override
     public void postProcessorAfterInvoke(Object result, ServletInvocableHandlerMethod handlerMethod, Object... args) {
@@ -51,7 +51,7 @@ public class OperatorLogHandler implements HandlerMethodPostProcessor {
                 // @OperatorLog("pageNum={criteria.pageNum} resultCode={$.code}")
 
                 Map<String, Object> map = getParamNameValueMap(handlerMethod.getMethodParameters(), args);
-                LogExpressionParser logExpressionParser = new OperatorLogExpressionParser(map, result, handlerMethod);
+                LogExpressionParser logExpressionParser = new ControllerLogExpressionParser(map, result, handlerMethod);
                 String content = logExpressionParser.parse(expression);
                 handleCustomLog(content, result, handlerMethod, args);
             }

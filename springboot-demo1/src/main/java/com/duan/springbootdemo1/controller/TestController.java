@@ -27,7 +27,7 @@ public class TestController {
     }
 
     @GetMapping("/t3")
-    @OperatorLog("#{(#$.code == 200 ? '成功' : '失败')+': 测试方法 3 ，参数值为' + #num}")
+    @OperatorLog("#{(#$.code == 200 ? '成功' : '失败'+': 测试方法 3 ，参数值为' + #num}")
     public ResultModel testDeviceType2(@RequestParam String num) {
         ResultModel model = new ResultModel();
         model.setCode(200);
