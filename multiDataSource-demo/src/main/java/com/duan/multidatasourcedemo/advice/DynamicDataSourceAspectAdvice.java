@@ -22,16 +22,19 @@ public class DynamicDataSourceAspectAdvice {
 
 
     @Around(value = "@annotation(dataSource)")
-    public void changeDataSource(ProceedingJoinPoint point, DataSource dataSource) throws Throwable {
+    public Object changeDataSource(ProceedingJoinPoint point, DataSource dataSource) throws Throwable {
 
         DsKey dsKey = dataSource.dsKey();
         if (!DynamicDataSource.contains(dsKey)) {
-            return;
+            return null;
         }
 
         DynamicDataSource.setDataSourceKey(dsKey);
-        point.proceed();
-        DynamicDataSource.clearDataSourceType(); // 恢复默认
+        try {
+            return point.proceed();
+        } finally { // 兼顾事务回滚的情况
+            DynamicDataSource.clearDataSourceType(); // 恢复默认
+        }
     }
 
 }
