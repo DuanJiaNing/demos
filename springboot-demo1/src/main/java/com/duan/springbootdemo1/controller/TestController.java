@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
 
     @GetMapping("/t1")
-    @OperatorLog("入参 modelCode 的值是 {model.code} ,结果是 {$},参数 num={num}")
+    @OperatorLog(value = "入参 modelCode 的值是 {model.code} ,结果是 {$},参数 num={num}",data = {"model.code","num"})
     public String testDeviceType(@RequestBody ResultModel model, @RequestParam String num) {
         return DeviceUtils.getDeviceType();
     }

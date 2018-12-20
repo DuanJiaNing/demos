@@ -1,8 +1,10 @@
 package com.duan.springbootdemo1.config.handler;
 
 import com.duan.springbootdemo1.config.annotation.OperatorLog;
+import com.duan.springbootdemo1.config.enums.OperatorLogMark;
 import com.duan.springbootdemo1.config.handler.log.LogExpressionParser;
-import com.duan.springbootdemo1.config.handler.log.ControllerLogExpressionParser;
+import com.duan.springbootdemo1.config.handler.log.OperatorLogDataParser;
+import com.duan.springbootdemo1.config.handler.log.OperatorLogExpressionParser;
 import com.duan.springbootdemo1.config.web.method.HandlerMethodPostProcessor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,38 +35,75 @@ public class LogHandler implements HandlerMethodPostProcessor {
         } else {
 
             String expression = annotation.value();
+            String content = null;
+
+            Map<String, Object> map = getParamNameValueMap(handlerMethod.getMethodParameters(), args);
+            OperatorLogDataParser dataParser = new OperatorLogDataParser(map, result);
+
             if (StringUtils.isBlank(expression)) {
                 handleDefaultLog(result, handlerMethod, args);
             } else if (expression.startsWith("#{")) { // SpEL 表达式
                 // @OperatorLog("#{'pageNum='+#criteria.pageNum+' resultCode=' + #$.code+' method='+#th}")
 
                 StandardEvaluationContext context = new StandardEvaluationContext();
-                Map<String, Object> map = getParamNameValueMap(handlerMethod.getMethodParameters(), args);
                 context.setVariables(map);
                 context.setVariable("$", result);
                 context.setVariable("method", handlerMethod);
 
                 ExpressionParser parser = new SpelExpressionParser();
                 Object value = parser.parseExpression(expression, new TemplateParserContext()).getValue(context);
-                handleCustomLog(String.valueOf(value), result, handlerMethod, args);
+                content = String.valueOf(value);
 
             } else { // 自定义的写法
                 // @OperatorLog("pageNum={criteria.pageNum} resultCode={$.code}")
 
-                Map<String, Object> map = getParamNameValueMap(handlerMethod.getMethodParameters(), args);
-                LogExpressionParser logExpressionParser = new ControllerLogExpressionParser(map, result, handlerMethod);
-                String content = logExpressionParser.parse(expression);
-                handleCustomLog(content, result, handlerMethod, args);
+                LogExpressionParser logExpressionParser = new OperatorLogExpressionParser(map, dataParser, result, handlerMethod);
+                content = logExpressionParser.parse(expression);
+            }
+
+            OperatorLogMark mark = annotation.mark();
+            Object[] datas = null;
+            if (annotation.data().length > 0) {
+                datas = new Object[annotation.data().length];
+                for (int i = 0; i < annotation.data().length; i++) {
+                    datas[i] = dataParser.parseValue(annotation.data()[i]);
+                }
+            }
+
+            handleCustomLog(content, mark, datas, result, handlerMethod, args);
+
+        }
+    }
+
+    private void handleCustomLog(String content, OperatorLogMark mark, Object[] datas, Object result,
+                                 ServletInvocableHandlerMethod handlerMethod, Object[] args) {
+        switch (mark) {
+            case CHANNEL:
+                insertChannelOperatorLog(content, datas);
+                break;
+        }
+    }
+
+    private void insertChannelOperatorLog(String content, Object[] datas) {
+
+        if (datas != null && datas.length == 1) {
+            Object data = datas[0];
+            if (data instanceof List) {
+                for (Object item : ((List) data)) {
+                    saveOperatorLog((Integer) item, content);
+                }
+            } else if (data instanceof Integer) {
+                saveOperatorLog((Integer) data, content);
             }
         }
     }
 
-    private void handleCustomLog(String content, Object result, ServletInvocableHandlerMethod handlerMethod, Object[]
-            args) {
+    private void saveOperatorLog(Integer channelId, String content) {
+        // access db
     }
 
-
     private void handleDefaultLog(Object result, ServletInvocableHandlerMethod handlerMethod, Object[] args) {
+        // handle default
     }
 
     private Map<String, Object> getParamNameValueMap(MethodParameter[] methodParameters, Object[] args) {
