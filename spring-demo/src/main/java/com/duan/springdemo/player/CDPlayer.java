@@ -30,10 +30,12 @@ import javax.annotation.Resource;
 @Component
 public class CDPlayer implements
         MediaPlayer,
+
         BeanNameAware,
         BeanFactoryAware,
-        BeanFactoryPostProcessor,
         ApplicationContextAware,
+
+        BeanFactoryPostProcessor,
         BeanPostProcessor,
         InitializingBean,
         DisposableBean {
