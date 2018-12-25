@@ -1,9 +1,11 @@
 package com.duan.springdemo.player;
 
-import com.duan.springdemo.disc.CompactDisc;
 import org.springframework.beans.BeansException;
+import com.duan.springdemo.disc.CompactDisc;
 import org.springframework.beans.factory.*;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
@@ -30,6 +32,7 @@ public class CDPlayer implements
         MediaPlayer,
         BeanNameAware,
         BeanFactoryAware,
+        BeanFactoryPostProcessor,
         ApplicationContextAware,
         BeanPostProcessor,
         InitializingBean,
@@ -104,5 +107,10 @@ public class CDPlayer implements
     public void destroy() throws Exception {
         // 9
         System.out.println("CDPlayer: step 9 destroy");
+    }
+
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+
     }
 }
