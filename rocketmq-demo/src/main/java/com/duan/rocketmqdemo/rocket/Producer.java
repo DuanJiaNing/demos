@@ -36,6 +36,8 @@ public class Producer extends BaseRocketMQ{
 
     public SendResult send(String msg, String topic,String tag){
         Message msag = new Message(topic, tag,msg.getBytes());
+//        msag.putUserProperty();
+//        msag.setDelayTimeLevel();
 
         try {
             return producer.send(msag);
