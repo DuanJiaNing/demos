@@ -2,7 +2,7 @@
 
 rocketmq:
   nameSrv:
-    address: 120.79.128.250:9876
+    address: 192.168.7.15:9876
   producer:
     group:
       test: rkmq-pro-group-one
@@ -13,3 +13,5 @@ rocketmq:
     test: rkmq-topic-test
   tag:
     test: rkmq-tag-test
+server:
+  port: 8888

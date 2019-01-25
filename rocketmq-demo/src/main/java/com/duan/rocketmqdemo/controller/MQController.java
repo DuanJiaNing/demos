@@ -1,7 +1,7 @@
 package com.duan.rocketmqdemo.controller;
 
 import com.duan.rocketmqdemo.TestBean;
-import com.duan.rocketmqdemo.Util;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequestMapping
 @RestController
+@Slf4j
 public class MQController {
 
     @Autowired
@@ -27,9 +28,10 @@ public class MQController {
         if (obj == null) obj = "test msg";
 
         for (int i = 0; i < times; i++) {
-            Util.p.accept(obj+" "+i);
             bean.send(obj);
         }
+
+        log.info("send [{}] {} times", obj, times);
 
     }
 

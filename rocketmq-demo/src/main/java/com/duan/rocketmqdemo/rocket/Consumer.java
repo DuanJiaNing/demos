@@ -22,8 +22,8 @@ public class Consumer extends BaseRocketMQ{
     public void init(MessageListenerConcurrently messageListener) {
 
         // 用来表示一个消费消息应用，一个 Consumer Group 下包含多个 Consumer 实例（机器，进程，实例），
-        // 一个 Consumer Group 下的多个 Consumer 以均摊方式消费消息，如果设置为广播方式，
-        // 那么这个 Consumer Group 下的每个实例都消费全量数据。
+        // 集群方式下，同一个 Consumer Group 下的多个 Consumer 以均摊方式消费消息
+        // 如果设置为广播方式，那么这个 Consumer Group 下的每个实例都消费全量数据
         consumer = new DefaultMQPushConsumer(consumerGroup);
 
         // Consumer 与 Name Server 集群中的其中一个节点（随机选择）建立长连接，定期从 Name Server 取 Topic 路由信息

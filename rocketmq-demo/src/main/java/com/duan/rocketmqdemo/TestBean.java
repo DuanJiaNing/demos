@@ -3,6 +3,7 @@ package com.duan.rocketmqdemo;
 import com.duan.rocketmqdemo.rocket.Consumer;
 import com.duan.rocketmqdemo.rocket.DefaultMessageListener;
 import com.duan.rocketmqdemo.rocket.Producer;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @author 段佳宁
  */
 @Component
-public class TestBean implements InitializingBean {
+public class TestBean implements InitializingBean, DisposableBean {
 
     @Value("${rocketmq.topic.test}")
     private String topic;
@@ -32,17 +33,22 @@ public class TestBean implements InitializingBean {
     private DefaultMessageListener listener;
 
     @Override
-    public void afterPropertiesSet(){
+    public void afterPropertiesSet() {
 
         consumer.init(listener);
         producer.init();
 
     }
 
-    public void send(Object obj){
-        producer.send(obj.toString(),topic,tag);
+    public void send(Object obj) {
+        producer.send(obj.toString(), topic, tag);
     }
 
+    @Override
+    public void destroy() throws Exception {
+        producer.shutdown();
+        consumer.shutdown();
+    }
 }
 
 
